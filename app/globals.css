@@ -34,10 +34,10 @@
     @apply mx-auto w-full max-w-content px-6 md:px-10;
   }
   .eyebrow {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-steeldeep;
+    @apply text-[12px] font-semibold uppercase tracking-[0.14em] text-steeldeep;
   }
   .eyebrow-light {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-silver;
+    @apply text-[12px] font-semibold uppercase tracking-[0.14em] text-silver;
   }
   .lede {
     @apply text-lg leading-relaxed text-inksoft;

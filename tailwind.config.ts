@@ -21,9 +21,11 @@ const config: Config = {
         inktext: "#101D2A",
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        // Single grotesque across the site. serif/mono alias to it so legacy
+        // utility classes render the same institutional sans (no serif, no mono).
+        sans: ["var(--font-sans)", "system-ui", "Segoe UI", "Arial", "sans-serif"],
+        serif: ["var(--font-sans)", "system-ui", "Segoe UI", "Arial", "sans-serif"],
+        mono: ["var(--font-sans)", "system-ui", "Segoe UI", "Arial", "sans-serif"],
       },
       maxWidth: {
         content: "1120px",

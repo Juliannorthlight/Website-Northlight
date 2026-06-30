@@ -124,12 +124,9 @@ export default function HomePage() {
           </Reveal>
           <div className="mt-10 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
             {process.map((step, i) => (
-              <Reveal key={step.n} delay={i * 90} className="bg-white p-7">
-                <span className="font-mono text-[13px] font-semibold tracking-[0.1em] text-graphite">
-                  {step.n}
-                </span>
-                <h3 className="mt-3 text-lg text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-inksoft">{step.body}</p>
+              <Reveal key={step.title} delay={i * 90} className="bg-white p-7">
+                <h3 className="text-lg text-ink">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-inksoft">{step.body}</p>
               </Reveal>
             ))}
           </div>

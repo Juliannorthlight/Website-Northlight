@@ -24,20 +24,12 @@ export default function ProcessPage() {
         <div className="container-nl py-20">
           <div className="space-y-px overflow-hidden border border-line bg-line">
             {process.map((step, i) => (
-              <Reveal key={step.n} delay={i * 70}>
-                <div className="grid gap-6 bg-white p-8 md:grid-cols-[140px_1fr] md:p-10">
-                  <div className="flex items-start gap-3">
-                    <span className="font-mono text-sm font-semibold tracking-[0.1em] text-graphite">
-                      {step.n}
-                    </span>
-                    <span className="hidden h-px w-10 translate-y-2.5 bg-line md:block" />
-                  </div>
-                  <div>
-                    <h2 className="text-2xl text-ink">{step.title}</h2>
-                    <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-inksoft">
-                      {step.body}
-                    </p>
-                  </div>
+              <Reveal key={step.title} delay={i * 70}>
+                <div className="bg-white p-8 md:p-10">
+                  <h2 className="text-2xl text-ink">{step.title}</h2>
+                  <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-inksoft">
+                    {step.body}
+                  </p>
                 </div>
               </Reveal>
             ))}
