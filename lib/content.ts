@@ -22,18 +22,18 @@ export const mainNav = [
 ];
 
 export const legalNav = [
-  { href: "#", label: "UK Stewardship Code" },
-  { href: "#", label: "SFDR Disclosure" },
-  { href: "#", label: "Privacy Policy" },
-  { href: "#", label: "Financial Promotions Disclaimer" },
-  { href: "#", label: "Email Disclaimer" },
+  { href: "/legal/uk-stewardship-code", label: "UK Stewardship Code" },
+  { href: "/legal/sfdr-disclosure", label: "SFDR Disclosure" },
+  { href: "/legal/privacy-policy", label: "Privacy Policy" },
+  { href: "/legal/financial-promotions-disclaimer", label: "Financial Promotions Disclaimer" },
+  { href: "/legal/email-disclaimer", label: "Email Disclaimer" },
 ];
 
 export const firmFacts = [
-  { value: "2009", label: "Founded" },
-  { value: "London", label: "Headquarters" },
-  { value: "FCA · SEC", label: "Regulated · full-scope AIFM" },
-  { value: "90+ yrs", label: "Combined credit experience" },
+  { value: "2009", label: "Founded in London" },
+  { value: "16yr", label: "Flagship track record" },
+  { value: "90+", label: "Years of combined credit experience" },
+  { value: "FCA · SEC", label: "Regulated — full-scope AIFM" },
 ];
 
 export const process = [

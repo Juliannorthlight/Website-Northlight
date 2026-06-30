@@ -46,7 +46,7 @@ export default function AboutPage() {
                   key={fact.label}
                   className="flex items-center justify-between gap-4 border-b border-line py-4"
                 >
-                  <dt className="font-serif text-xl font-bold text-ink">{fact.value}</dt>
+                  <dt className="font-serif text-xl font-semibold text-ink">{fact.value}</dt>
                   <dd className="text-right font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
                     {fact.label}
                   </dd>

@@ -26,15 +26,15 @@ export default function StrategiesPage() {
               <Reveal key={s.slug} delay={i * 70}>
                 <article
                   id={s.slug}
-                  className="scroll-mt-24 border border-line border-l-[3px] border-l-ink bg-white p-8 md:p-10"
+                  className="scroll-mt-24 border border-line bg-white p-8 md:p-10"
                 >
                   <div className="grid gap-8 md:grid-cols-[1fr_1.1fr]">
                     <div>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-steeldeep">
                         {s.tag}
                       </span>
-                      <h2 className="mt-3 text-2xl text-ink md:text-[28px]">{s.name}</h2>
-                      <p className="mt-2 font-mono text-[12px] tracking-[0.04em] text-graphite">
+                      <h2 className="mt-3 text-2xl text-ink md:text-[30px]">{s.name}</h2>
+                      <p className="mt-2 text-[13px] font-medium text-graphite">
                         {s.structure}
                       </p>
                       <p className="mt-5 max-w-md text-[15px] leading-relaxed text-inksoft">

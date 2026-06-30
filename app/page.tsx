@@ -70,18 +70,20 @@ export default function HomePage() {
 
       {/* ---------- Who we are ---------- */}
       <section className="border-b border-line bg-white">
-        <div className="container-nl grid gap-12 py-20 md:grid-cols-[1.35fr_1fr] md:py-24">
+        <div className="container-nl grid gap-10 py-20 md:grid-cols-[0.85fr_1.15fr] md:gap-16 md:py-24">
           <Reveal>
             <Eyebrow>Who we are</Eyebrow>
-            <h2 className="mt-4 text-3xl leading-tight text-ink md:text-[34px]">
+            <h2 className="mt-4 text-3xl leading-tight text-ink md:text-[36px]">
               A European asset manager with its own ethos
             </h2>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-inksoft">
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="text-[18px] leading-relaxed text-inksoft">
               Northlight was founded in 2009 by portfolio managers Cyril Armleder and Shahar Zer,
               after multi-decade sell-side and buy-side careers, with the goal of building a European
               asset manager with a distinct ethos — one focused on liquidity-adjusted risk and return.
             </p>
-            <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-inksoft">
+            <p className="mt-5 text-[18px] leading-relaxed text-inksoft">
               The team invests across the entire credit spectrum, with its primary focus on the
               European high-yield markets, seeking consistent, positive and uncorrelated returns in
               all market environments.
@@ -95,21 +97,24 @@ export default function HomePage() {
               </Link>
             </div>
           </Reveal>
-          <Reveal delay={120}>
-            <dl className="border-t border-line">
-              {firmFacts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="flex items-center justify-between gap-4 border-b border-line py-4"
-                >
-                  <dt className="font-serif text-xl font-bold text-ink">{fact.value}</dt>
-                  <dd className="text-right font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
-                    {fact.label}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- Statement numbers (full-width band) ---------- */}
+      <section className="border-b border-navyline bg-ink text-white">
+        <div className="container-nl py-14 md:py-16">
+          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
+            {firmFacts.map((fact, i) => (
+              <Reveal key={fact.label} delay={i * 80}>
+                <dt className="font-serif text-4xl font-medium leading-none text-white md:text-5xl">
+                  {fact.value}
+                </dt>
+                <dd className="mt-3 text-[13px] uppercase tracking-[0.12em] text-silver">
+                  {fact.label}
+                </dd>
+              </Reveal>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -153,18 +158,16 @@ export default function HomePage() {
               <Reveal key={s.slug} delay={i * 80}>
                 <Link
                   href={`/strategies#${s.slug}`}
-                  className="flex h-full flex-col border border-line border-t-[3px] border-t-ink bg-white p-7 transition-shadow hover:shadow-[0_20px_40px_-28px_rgba(11,27,46,0.45)]"
+                  className="group flex h-full flex-col border border-line bg-white p-8 transition-colors hover:border-graphite"
                 >
-                  <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-steeldeep">
                     {s.tag}
                   </span>
-                  <h3 className="mt-2.5 text-xl leading-snug text-ink">{s.name}</h3>
-                  <p className="mt-1.5 font-mono text-[11px] tracking-[0.04em] text-muted">
-                    {s.structure}
-                  </p>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-inksoft">{s.summary}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-[13px] font-semibold text-steeldeep">
-                    Learn more <ArrowRight />
+                  <h3 className="mt-3 text-[22px] leading-snug text-ink">{s.name}</h3>
+                  <p className="mt-2 text-[13px] font-medium text-muted">{s.structure}</p>
+                  <p className="mt-4 flex-1 text-[15px] leading-relaxed text-inksoft">{s.summary}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 border-t border-line pt-4 text-[13px] font-semibold uppercase tracking-[0.08em] text-ink">
+                    View strategy <ArrowRight />
                   </span>
                 </Link>
               </Reveal>
@@ -196,7 +199,7 @@ export default function HomePage() {
             <dl className="grid grid-cols-3 gap-px overflow-hidden border border-line bg-line">
               {teamStats.map((stat) => (
                 <div key={stat.label} className="bg-white p-5">
-                  <dt className="font-serif text-2xl font-bold text-ink">{stat.value}</dt>
+                  <dt className="font-serif text-2xl font-semibold text-ink">{stat.value}</dt>
                   <dd className="mt-1 text-[12px] leading-snug text-muted">{stat.label}</dd>
                 </div>
               ))}

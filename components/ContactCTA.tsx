@@ -11,8 +11,8 @@ export function ContactCTA() {
             Speak with our Investor Relations team
           </h2>
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#C8D4DF]">
-            For information on our strategies, due-diligence materials or access to the investor
-            portal, we welcome your enquiry.
+            For information on our strategies, due-diligence materials or any other enquiry, we
+            welcome you to get in touch.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <ButtonLink href="/contact" variant="ondark-solid">

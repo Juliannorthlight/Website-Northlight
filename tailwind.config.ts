@@ -21,14 +21,16 @@ const config: Config = {
         inktext: "#101D2A",
       },
       fontFamily: {
-        // Single grotesque across the site. serif/mono alias to it so legacy
-        // utility classes render the same institutional sans (no serif, no mono).
+        // Institutional pairing: a transitional serif for display (the gravitas
+        // established credit managers use) over a clean grotesque for everything
+        // else. mono aliases to the grotesque so legacy utilities stay sans.
         sans: ["var(--font-sans)", "system-ui", "Segoe UI", "Arial", "sans-serif"],
-        serif: ["var(--font-sans)", "system-ui", "Segoe UI", "Arial", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
         mono: ["var(--font-sans)", "system-ui", "Segoe UI", "Arial", "sans-serif"],
       },
       maxWidth: {
-        content: "1120px",
+        content: "1280px",
+        prose: "68ch",
       },
       letterSpacing: {
         tightish: "-0.012em",

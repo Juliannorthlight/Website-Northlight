@@ -23,7 +23,7 @@ function Portrait({ initials }: { initials: string }) {
           <line x1="80" y1="0" x2="80" y2="125" />
         </g>
       </svg>
-      <span className="relative font-serif text-3xl font-bold text-white/85">{initials}</span>
+      <span className="relative font-serif text-3xl font-semibold text-white/85">{initials}</span>
     </div>
   );
 }
@@ -73,7 +73,7 @@ export default function TeamPage() {
           <dl className="grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
             {teamStats.map((stat) => (
               <div key={stat.label} className="bg-white p-8">
-                <dt className="font-serif text-3xl font-bold text-ink">{stat.value}</dt>
+                <dt className="font-serif text-3xl font-semibold text-ink">{stat.value}</dt>
                 <dd className="mt-2 text-sm text-inksoft">{stat.label}</dd>
               </div>
             ))}
