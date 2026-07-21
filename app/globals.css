@@ -33,11 +33,22 @@
   .container-nl {
     @apply mx-auto w-full max-w-content px-6 md:px-10;
   }
+  /* Section kicker / eyebrow label — used across the site. Moved off the airy
+     wide-tracked all-caps look (read as generic/AI) to a tighter, bolder
+     Archivo label with a leading rule for a more editorial, bespoke feel. */
   .eyebrow {
-    @apply text-[12px] font-semibold uppercase tracking-[0.14em] text-steeldeep;
+    @apply inline-flex items-center gap-2.5 font-serif text-[12.5px] font-bold uppercase tracking-[0.05em] text-steeldeep;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-px w-6 bg-steel/70;
   }
   .eyebrow-light {
-    @apply text-[12px] font-semibold uppercase tracking-[0.14em] text-silver;
+    @apply inline-flex items-center gap-2.5 font-serif text-[12.5px] font-bold uppercase tracking-[0.05em] text-silver;
+  }
+  .eyebrow-light::before {
+    content: "";
+    @apply inline-block h-px w-6 bg-silver/60;
   }
   .lede {
     @apply text-lg leading-relaxed text-inksoft;

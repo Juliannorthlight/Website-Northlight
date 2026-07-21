@@ -5,15 +5,43 @@ import { PageHero } from "@/components/PageHero";
 import { Eyebrow } from "@/components/ui";
 import { firm } from "@/lib/content";
 
+// Formspree endpoint — delivers submissions to Investor Relations.
+const FORM_ENDPOINT = "https://formspree.io/f/xvzjwzbd";
+
+type Status = "idle" | "submitting" | "sent" | "error";
+
 export default function ContactPage() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setStatus("submitting");
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      if (res.ok) {
+        form.reset();
+        setStatus("sent");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <>
       <PageHero
         eyebrow="Contact"
         title="Speak with Investor Relations"
-        intro="For information on our strategies, due-diligence materials or portal access, we welcome your enquiry."
+        intro="For information on our strategies, due-diligence materials or any other enquiry, we welcome you to get in touch."
+        image="/heroes/walkway.jpg"
+        imagePosition="center"
       />
 
       <section className="bg-white">
@@ -29,13 +57,13 @@ export default function ContactPage() {
 
             <dl className="mt-8 space-y-4 border-t border-line pt-8">
               <div>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                   Telephone
                 </dt>
                 <dd className="mt-1 text-[17px] text-ink">{firm.tel}</dd>
               </div>
               <div>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                   Email
                 </dt>
                 <dd className="mt-1 text-[17px]">
@@ -60,12 +88,12 @@ export default function ContactPage() {
 
           {/* Enquiry form */}
           <div className="border border-line bg-mist p-8 md:p-10">
-            {sent ? (
+            {status === "sent" ? (
               <div>
                 <h2 className="text-2xl text-ink">Thank you for your enquiry</h2>
                 <p className="mt-4 text-[15px] leading-relaxed text-inksoft">
-                  This is a preview form. In production it routes to Investor Relations. In the
-                  meantime, please email{" "}
+                  Your message has been sent to our Investor Relations team and we will be in touch
+                  shortly. For anything urgent, you can reach us directly at{" "}
                   <a href={`mailto:${firm.email}`} className="text-steeldeep hover:text-ink">
                     {firm.email}
                   </a>
@@ -73,29 +101,41 @@ export default function ContactPage() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => setSent(false)}
+                  onClick={() => setStatus("idle")}
                   className="mt-6 text-sm font-semibold text-steeldeep hover:text-ink"
                 >
                   &larr; Send another enquiry
                 </button>
               </div>
             ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-              >
+              <form onSubmit={handleSubmit}>
                 <h2 className="text-xl text-ink">Make an enquiry</h2>
+
+                {/* Subject line for the delivered email + spam honeypot */}
+                <input type="hidden" name="_subject" value="New enquiry — northlight.co.uk" />
+                <input
+                  type="text"
+                  name="_gotcha"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
+
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <Field label="Full name" name="name" />
-                  <Field label="Organisation" name="org" />
+                  <Field label="Organisation" name="organisation" />
                   <Field label="Email" name="email" type="email" className="sm:col-span-2" />
                   <div className="sm:col-span-2">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                    <label
+                      htmlFor="investorType"
+                      className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted"
+                    >
                       Investor type
-                    </span>
+                    </label>
                     <select
+                      id="investorType"
+                      name="investor type"
                       required
                       defaultValue=""
                       className="mt-2 w-full border border-line bg-white px-4 py-3 text-sm text-inktext outline-none focus:border-steel"
@@ -112,25 +152,45 @@ export default function ContactPage() {
                     </select>
                   </div>
                   <label className="block sm:col-span-2">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                       Message
                     </span>
                     <textarea
+                      name="message"
                       rows={4}
+                      required
                       className="mt-2 w-full resize-none border border-line bg-white px-4 py-3 text-sm text-inktext outline-none focus:border-steel"
                       placeholder="How can we help?"
                     />
                   </label>
                 </div>
+
                 <button
                   type="submit"
-                  className="mt-6 w-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy sm:w-auto sm:px-8"
+                  disabled={status === "submitting"}
+                  className="mt-6 w-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:px-8"
                 >
-                  Submit enquiry
+                  {status === "submitting" ? "Sending…" : "Submit enquiry"}
                 </button>
+
+                {status === "error" && (
+                  <p className="mt-4 text-[13px] leading-relaxed text-[#B4402E]">
+                    Something went wrong sending your enquiry. Please try again, or email us directly
+                    at{" "}
+                    <a href={`mailto:${firm.email}`} className="font-semibold underline">
+                      {firm.email}
+                    </a>
+                    .
+                  </p>
+                )}
+
                 <p className="mt-5 text-[11px] leading-relaxed text-muted">
                   By submitting you agree that Northlight may contact you regarding your enquiry. We
-                  handle your information in line with our Privacy Policy.
+                  handle your information in line with our{" "}
+                  <a href="/legal/privacy-policy" className="underline hover:text-ink">
+                    Privacy Policy
+                  </a>
+                  .
                 </p>
               </form>
             )}
@@ -154,7 +214,9 @@ function Field({
 }) {
   return (
     <label className={`block ${className}`}>
-      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">{label}</span>
+      <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+        {label}
+      </span>
       <input
         type={type}
         name={name}

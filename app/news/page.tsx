@@ -16,6 +16,8 @@ export default function NewsPage() {
         eyebrow="News"
         title="News & announcements"
         intro="Firm news, fund milestones and recognition. Detailed commentary is shared directly with investors."
+        image="/heroes/arch.jpg"
+        imagePosition="center 42%"
       />
 
       <section className="bg-white">

@@ -18,6 +18,8 @@ export default function AboutPage() {
         eyebrow="About Northlight"
         title="A European asset manager with its own ethos"
         intro="Founded in 2009 with a focus on liquidity-adjusted risk and return."
+        image="/heroes/pylon.jpg"
+        imagePosition="center"
       />
 
       {/* Founding story */}
@@ -40,19 +42,19 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <dl className="border-t border-line">
+            <ul className="ml-1 space-y-8 border-l-2 border-line pl-8">
               {firmFacts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="flex items-center justify-between gap-4 border-b border-line py-4"
-                >
-                  <dt className="font-serif text-xl font-semibold text-ink">{fact.value}</dt>
-                  <dd className="text-right font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
+                <li key={fact.label} className="relative">
+                  <span className="absolute -left-[41px] top-1.5 h-3 w-3 rounded-full bg-steel ring-4 ring-white" />
+                  <div className="font-serif text-3xl font-semibold leading-none text-ink">
+                    {fact.value}
+                  </div>
+                  <div className="mt-2 text-[12px] uppercase tracking-[0.12em] text-muted">
                     {fact.label}
-                  </dd>
-                </div>
+                  </div>
+                </li>
               ))}
-            </dl>
+            </ul>
           </Reveal>
         </div>
       </section>
@@ -61,29 +63,23 @@ export default function AboutPage() {
       <section className="border-b border-line bg-mist">
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1.1fr_1fr]">
           <Reveal>
-            {/* Placeholder for a photograph of 33 Glasshouse Street.
-                Replace this block with the building image when supplied. */}
-            <div
-              className="relative flex aspect-[4/3] items-end overflow-hidden border border-line"
-              style={{ background: "linear-gradient(160deg,#16324f 0%,#0B1B2E 100%)" }}
-              aria-label="33 Glasshouse Street, London"
-            >
-              <svg
-                viewBox="0 0 400 300"
-                className="absolute inset-0 h-full w-full opacity-40"
-                aria-hidden="true"
-              >
-                <g stroke="#34618C" strokeWidth="0.8" opacity="0.6">
-                  {Array.from({ length: 9 }).map((_, i) => (
-                    <line key={i} x1={40 + i * 42} y1="40" x2={40 + i * 42} y2="300" />
-                  ))}
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <line key={`h${i}`} x1="40" y1={60 + i * 40} x2="380" y2={60 + i * 40} />
-                  ))}
-                </g>
-              </svg>
-              <span className="relative m-5 bg-white/90 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-graphite">
-                Photograph · 33 Glasshouse Street
+            {/* Placeholder photo (Regent Street quadrant, licence-free) — swap for
+                a real 33 Glasshouse Street shot when supplied. */}
+            <div className="relative overflow-hidden border border-line">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/office.jpg"
+                alt="Regent Street, London — near Northlight's office at 33 Glasshouse Street"
+                className="block aspect-[4/3] w-full object-cover"
+                style={{ filter: "grayscale(100%) contrast(1.05) brightness(1.06)" }}
+                loading="lazy"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 mix-blend-multiply"
+                style={{ background: "linear-gradient(155deg,#2a6aa8 0%,#0B1B2E 95%)", opacity: 0.4 }}
+              />
+              <span className="absolute bottom-3 right-3 bg-ink/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/80">
+                Placeholder · Regent Street, W1
               </span>
             </div>
           </Reveal>

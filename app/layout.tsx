@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Libre_Franklin, Spectral } from "next/font/google";
+import { Libre_Franklin, Archivo } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -12,12 +12,13 @@ const sans = Libre_Franklin({
   display: "swap",
 });
 
-// Display: a transitional serif used for headlines only — the gravitas of an
-// established asset manager, and a deliberate step away from the all-sans look.
-const serif = Spectral({
+// Display: Archivo — a confident, contemporary grotesque for headlines and
+// figures. A deliberate move away from the serif (which read as generic/AI),
+// toward the clean bold-sans headline used by institutional credit peers.
+// The CSS var stays --font-serif so existing `font-serif` utilities pick it up.
+const display = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700"],
   variable: "--font-serif",
   display: "swap",
 });
@@ -40,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="en" className={`${sans.variable} ${display.variable}`}>
       <body className="flex min-h-screen flex-col">
         <Header />
         <main className="flex-1">{children}</main>

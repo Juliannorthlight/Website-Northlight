@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
+import { Eyebrow } from "@/components/ui";
 import { ContactCTA } from "@/components/ContactCTA";
-import { team, teamStats } from "@/lib/content";
+import { team } from "@/lib/content";
+
+// Team stats — the two metrics count up on first view; the year stays static.
+const teamStatsAnim: { value: React.ReactNode; label: string }[] = [
+  { value: <CountUp end={90} suffix="+" />, label: "Years of combined credit experience" },
+  { value: <CountUp end={7} />, label: "Languages spoken across the team" },
+  { value: "2009", label: "Investing together since" },
+];
 
 export const metadata: Metadata = {
   title: "Team",
@@ -10,7 +19,20 @@ export const metadata: Metadata = {
     "Northlight is led by founding portfolio managers Cyril Armleder and Shahar Zer, with a team carrying 90+ years of combined credit experience.",
 };
 
-function Portrait({ initials }: { initials: string }) {
+function Portrait({ initials, photo, name }: { initials: string; photo?: string; name: string }) {
+  if (photo) {
+    return (
+      <div className="relative aspect-[4/5] overflow-hidden border border-line bg-mist">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={photo}
+          alt={name}
+          className="h-full w-full object-cover object-top"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
   return (
     <div
       className="relative flex aspect-[4/5] items-center justify-center overflow-hidden"
@@ -35,6 +57,8 @@ export default function TeamPage() {
         eyebrow="Our team"
         title="Led by its founders"
         intro="Northlight is led by founding portfolio managers Cyril Armleder and Shahar Zer, supported by a diverse, experienced investment team."
+        image="/heroes/viaduct.jpg"
+        imagePosition="center 42%"
       />
 
       {/* Founders */}
@@ -49,7 +73,7 @@ export default function TeamPage() {
               <Reveal key={m.name}>
                 <article className="grid gap-8 md:grid-cols-[260px_1fr] md:gap-12">
                   <div className="max-w-[260px]">
-                    <Portrait initials={initials} />
+                    <Portrait initials={initials} photo={m.photo} name={m.name} />
                   </div>
                   <div>
                     <h2 className="text-2xl text-ink md:text-[28px]">{m.name}</h2>
@@ -67,22 +91,34 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Team stats */}
+      {/* Team stats — Sona-style connected rail */}
       <section className="border-b border-line bg-mist">
-        <div className="container-nl py-16">
-          <dl className="grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
-            {teamStats.map((stat) => (
-              <div key={stat.label} className="bg-white p-8">
-                <dt className="font-serif text-3xl font-semibold text-ink">{stat.value}</dt>
-                <dd className="mt-2 text-sm text-inksoft">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted">
-            Northlight&apos;s portfolio managers are supported by a wider team across research, risk,
-            operations and investor relations. Full team details are available to prospective
-            investors on request.
-          </p>
+        <div className="container-nl grid gap-12 py-16 md:grid-cols-[1fr_1fr] md:items-center md:py-20">
+          <Reveal>
+            <Eyebrow>The team in numbers</Eyebrow>
+            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-inksoft">
+              Northlight&apos;s founding portfolio managers are supported by a wider team across
+              research, risk, operations and investor relations.
+            </p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
+              Full team details are available to prospective investors on request.
+            </p>
+          </Reveal>
+          <Reveal delay={120}>
+            <ul className="ml-1 space-y-9 border-l-2 border-line pl-9">
+              {teamStatsAnim.map((stat) => (
+                <li key={stat.label} className="relative">
+                  <span className="absolute -left-[43px] top-1.5 h-3 w-3 rounded-full bg-steel ring-4 ring-mist" />
+                  <div className="font-serif text-4xl font-semibold leading-none text-ink md:text-5xl">
+                    {stat.value}
+                  </div>
+                  <div className="mt-2.5 text-[13px] uppercase tracking-[0.12em] text-muted">
+                    {stat.label}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </section>
 

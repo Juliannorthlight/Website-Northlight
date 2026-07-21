@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { Eyebrow } from "@/components/ui";
+import { ProcessAccordion } from "@/components/ProcessAccordion";
 import { ContactCTA } from "@/components/ContactCTA";
-import { process } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Investment Process",
@@ -18,22 +18,22 @@ export default function ProcessPage() {
         eyebrow="Investment Process"
         title="Discipline is the product"
         intro="For a credit manager, a repeatable process is what turns experience into consistent outcomes. Ours runs in four connected stages, underpinned by a systematic macro-overlay."
+        image="/heroes/span.jpg"
+        imagePosition="center"
       />
 
       <section className="border-b border-line bg-white">
         <div className="container-nl py-20">
-          <div className="space-y-px overflow-hidden border border-line bg-line">
-            {process.map((step, i) => (
-              <Reveal key={step.title} delay={i * 70}>
-                <div className="bg-white p-8 md:p-10">
-                  <h2 className="text-2xl text-ink">{step.title}</h2>
-                  <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-inksoft">
-                    {step.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="mb-8">
+            <Eyebrow>How we invest</Eyebrow>
+            <h2 className="mt-4 text-3xl text-ink">A repeatable, four-stage discipline</h2>
+            <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted">
+              Select any stage to expand the detail.
+            </p>
+          </Reveal>
+          <Reveal>
+            <ProcessAccordion />
+          </Reveal>
         </div>
       </section>
 
@@ -53,15 +53,28 @@ export default function ProcessPage() {
                 sits above bottom-up positioning, intended to preserve capital and manage exposure
                 through changing conditions.
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-                {["Investment grade", "BB", "B", "CCC", "Stressed"].map((label, idx, arr) => (
-                  <span key={label} className="flex items-center gap-2">
-                    <span className="border border-line bg-white px-3 py-1.5 text-graphite">
-                      {label}
-                    </span>
-                    {idx < arr.length - 1 && <span className="text-line">/</span>}
-                  </span>
-                ))}
+              <div className="mt-8 max-w-xl">
+                <div className="flex overflow-hidden border border-line text-center">
+                  {[
+                    { label: "Inv. grade", bg: "#E4EAF0", fg: "#42566A" },
+                    { label: "BB", bg: "#B9C7D6", fg: "#22384F" },
+                    { label: "B", bg: "#6E93B6", fg: "#FFFFFF" },
+                    { label: "CCC", bg: "#3C6489", fg: "#FFFFFF" },
+                    { label: "Stressed", bg: "#14314F", fg: "#FFFFFF" },
+                  ].map((s) => (
+                    <div
+                      key={s.label}
+                      className="flex-1 px-2 py-2.5 text-[10px] font-semibold uppercase tracking-[0.09em]"
+                      style={{ background: s.bg, color: s.fg }}
+                    >
+                      {s.label}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-2.5 flex justify-between text-[10px] uppercase tracking-[0.1em] text-muted">
+                  <span>Lower risk</span>
+                  <span>Higher risk</span>
+                </div>
               </div>
             </Reveal>
           </div>
