@@ -39,6 +39,8 @@ Then open http://localhost:3000
 2. **Publish:** `npx vercel --prod`.
 3. **Connect the domain:** add `northlight.co.uk` in the Vercel dashboard and set the DNS records it shows at the domain registrar.
 
+**Note:** the Vercel project is now connected to this GitHub repo — every push to `main` deploys to production automatically. Manual `deploy.cmd` runs are no longer required.
+
 ## Before a public launch
 - **Compliance:** fund return targets are financial promotions — have Compliance review all copy first.
 - **Images:** current photos are licence-free (Unsplash) placeholders + firm-owned founder photos; swap `public/office.jpg` for a real 33 Glasshouse Street facade photo when available.
