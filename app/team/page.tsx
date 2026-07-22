@@ -79,9 +79,6 @@ export default function TeamPage() {
                     <h2 className="text-2xl text-ink md:text-[28px]">{m.name}</h2>
                     <p className="mt-1 text-[15px] font-medium text-steeldeep">{m.role}</p>
                     <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-inksoft">{m.bio}</p>
-                    <p className="mt-4 font-mono text-[12px] uppercase tracking-[0.1em] text-muted">
-                      {m.languages}
-                    </p>
                   </div>
                 </article>
                 {i < team.length - 1 && <div className="mt-14 h-px w-full bg-line" />}

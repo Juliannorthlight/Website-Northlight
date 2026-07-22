@@ -15,7 +15,7 @@ export const firm = {
 export const mainNav = [
   { href: "/about", label: "About" },
   { href: "/strategies", label: "Strategies" },
-  { href: "/process", label: "Process" },
+  // { href: "/process", label: "Process" }, // removed per pre-launch feedback 2026-07-22 — kept for easy restore
   { href: "/team", label: "Team" },
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
@@ -33,7 +33,6 @@ export const firmFacts = [
   { value: "2009", label: "Founded in London" },
   { value: "16yr", label: "Flagship track record" },
   { value: "90+", label: "Years of combined credit experience" },
-  { value: "FCA · SEC", label: "Regulated — full-scope AIFM" },
 ];
 
 export type ProcessStep = {
@@ -168,7 +167,7 @@ export const strategies: Strategy[] = [
       { investorType: "Institutional", currency: "GBP", isin: "LU1989157778", bbg: "MFMECIG LX" },
       { investorType: "Institutional", currency: "USD", isin: "LU1340030144", bbg: "MFMECIU LX" },
       { investorType: "Retail", currency: "USD", isin: "LU1340031209", bbg: "JAECRUH LX" },
-      { investorType: "Institutional", currency: "JPY", isin: "LU3058829923" },
+      { investorType: "Institutional", currency: "JPY", isin: "LU3058829923", bbg: "MFMNECI LX" },
       { investorType: "Retail", currency: "JPY", isin: "LU3058830004" },
     ],
   },
@@ -217,7 +216,6 @@ export const strategies: Strategy[] = [
 export type TeamMember = {
   name: string;
   role: string;
-  languages: string;
   bio: string;
   photo?: string;
 };
@@ -227,14 +225,12 @@ export const team: TeamMember[] = [
     name: "Cyril Armleder",
     role: "Partner & Portfolio Manager",
     photo: "/team/cyril-armleder.jpg",
-    languages: "Fluent in French and English",
     bio: "Cyril is a Partner of Northlight Group and a member of the Investment and Management Committees for the Northlight funds. He was previously a Partner at GLG Partners (2005–2009), where he co-managed the GLG Credit Fund and advised on credit strategies across other GLG funds. At Goldman Sachs (2001–2005) he established and headed the iTraxx credit index and derivatives trading desk, having co-run the European TMT credit sectors and helped set up the European Credit Trading Desk. He began his career at Commerzbank (1993–2001) as a credit derivatives trader during the emergence of the CDS market. Cyril holds an MSc in Mathematical Finance from Birkbeck College, University of London, and a degree in Macroeconomics from HEC Lausanne.",
   },
   {
     name: "Shahar Zer",
     role: "Partner & Portfolio Manager",
     photo: "/team/shahar-zer.jpg",
-    languages: "Fluent in English and Hebrew",
     bio: "Shahar is a Partner of Northlight Group and a member of the Investment and Management Committees for the Northlight funds. He was previously at JP Morgan Private Bank (2008–2009), where he led the establishment of the European Global Sales Trading desk. At Lehman Brothers Europe (1998–2008) he ran the Leveraged Loan Trading Desk, managed Syndicate Desk risk (2007–2008) and built out the European high-yield trading desk, after earlier working as a high-yield and distressed credit analyst. He began his Lehman Brothers career in the M&A group of the Investment Bank. Shahar holds a BA in Economics and Political Science from the University of Rochester and an MSc in Finance and Accounting from the London School of Economics.",
   },
 ];

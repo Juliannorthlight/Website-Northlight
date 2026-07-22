@@ -104,19 +104,24 @@ export default function AboutPage() {
               An institutional framework allocators can rely on
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
             {[
-              {
-                h: "FCA-regulated full-scope AIFM",
-                p: "Authorised and regulated by the Financial Conduct Authority in the United Kingdom.",
-              },
-              {
-                h: "SEC Exempt Reporting Adviser",
-                p: "Registered with the US Securities and Exchange Commission as an Exempt Reporting Adviser.",
-              },
+              // FCA/SEC regulatory cards removed per pre-launch feedback (2026-07-22) — kept for easy restore:
+              // {
+              //   h: "FCA-regulated full-scope AIFM",
+              //   p: "Authorised and regulated by the Financial Conduct Authority in the United Kingdom.",
+              // },
+              // {
+              //   h: "SEC Exempt Reporting Adviser",
+              //   p: "Registered with the US Securities and Exchange Commission as an Exempt Reporting Adviser.",
+              // },
               {
                 h: "Established service providers",
                 p: "Supported by tier-one prime brokers, fund administrators, auditors and legal counsel across the fund range.",
+              },
+              {
+                h: "Institutional operating framework",
+                p: "Independent governance, oversight and controls across the fund range, built to the standards institutional allocators expect.",
               },
             ].map((item) => (
               <Reveal key={item.h} className="border-l-2 border-graphite bg-mist p-6">

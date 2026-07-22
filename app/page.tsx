@@ -13,7 +13,6 @@ const bandStats: {
   { value: "2009", label: "Founded in London" },
   { value: <CountUp end={16} suffix="yr" />, label: "Flagship track record" },
   { value: <CountUp end={90} suffix="+" />, label: "Years of combined credit experience" },
-  { value: "FCA · SEC", label: "Regulated — full-scope AIFM" },
 ];
 
 // Home team teaser — same connected rail + count-up as the Team page.
@@ -60,7 +59,7 @@ export default function HomePage() {
               emphasis on liquidity and capital preservation.
             </p>
             <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2 text-[14px] font-medium text-[#CDD8E2]">
-              {["Investing since 2009", "FCA & SEC regulated", "European high-yield focus"].map(
+              {["Investing since 2009", "European high-yield focus"].map(
                 (item) => (
                   <span key={item} className="relative pl-4">
                     <span className="absolute left-0 top-[8px] h-1.5 w-1.5 rounded-full bg-steel" />
@@ -121,7 +120,7 @@ export default function HomePage() {
       {/* ---------- Statement numbers (full-width band) ---------- */}
       <section className="border-b border-navyline bg-ink text-white">
         <div className="container-nl py-14 md:py-16">
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
+          <dl className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-3">
             {bandStats.map((fact, i) => (
               <Reveal key={fact.label} delay={i * 80}>
                 <dt className="font-serif text-4xl font-medium leading-none text-white md:text-5xl">
@@ -175,7 +174,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- Process (navy accent, teaser) ---------- */}
+      {/* ---------- Process (navy accent, teaser) ----------
+           Removed per pre-launch feedback (2026-07-22). Kept but disabled for easy restore:
+           change `false` to `true` below to bring the section back. */}
+      {false && (
       <section className="border-b border-navyline bg-ink text-white">
         <div className="container-nl py-20 md:py-24">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
@@ -198,6 +200,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ---------- Team ---------- */}
       <section className="border-b border-line bg-mist">
