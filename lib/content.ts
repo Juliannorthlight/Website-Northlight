@@ -134,6 +134,8 @@ export const strategies: Strategy[] = [
       "Idiosyncratic, catalyst-driven opportunities sourced bottom-up",
       "Systematic macro-overlay intended to preserve capital",
       "Balanced long and short — roughly two-thirds long, one-third short",
+      "Positive calendar-year performance in 15 of the last 16 years",
+      "Historically lower drawdowns than the European High Yield market",
     ],
   },
   {
