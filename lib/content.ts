@@ -15,7 +15,8 @@ export const firm = {
 export const mainNav = [
   { href: "/about", label: "About" },
   { href: "/strategies", label: "Strategies" },
-  // { href: "/process", label: "Process" }, // removed per pre-launch feedback 2026-07-22 — kept for easy restore
+  { href: "/process-risk", label: "Process & Risk" },
+  // { href: "/process", label: "Process" }, // old detailed process page — replaced by /process-risk (concise); code kept in app/_process
   { href: "/team", label: "Team" },
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
@@ -93,6 +94,23 @@ export const process: ProcessStep[] = [
     ],
   },
 ];
+
+// Risk-management summary for the public Process & Risk page.
+// Sources: firm's May 2026 deck (macro-overlay, exposure/liquidity sizing, stress-testing)
+// + Nicolas's approved public-content list (independent oversight, daily monitoring, limits/drawdown controls).
+export const riskManagement = {
+  intro:
+    "Risk management is integral to the strategy, not a separate step. The approach is liquidity-led, with a systematic macro-overlay designed to preserve capital and protect the downside through all market conditions.",
+  points: [
+    "Independent risk oversight of the portfolio",
+    "Daily monitoring of exposures and liquidity",
+    "Gross and net exposure actively managed to the prevailing market environment",
+    "Position sizing constrained by liquidity and expected time-to-exit",
+    "A systematic macro-overlay expressed through CDS and index or equity options",
+    "Positioning stress-tested against historical drawdown scenarios",
+    "Defined position limits and drawdown controls",
+  ],
+};
 
 export type ShareClass = {
   investorType: "Institutional" | "Retail";
