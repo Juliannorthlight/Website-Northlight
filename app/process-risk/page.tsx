@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { Eyebrow } from "@/components/ui";
+import { ProcessAccordion } from "@/components/ProcessAccordion";
 import { ContactCTA } from "@/components/ContactCTA";
-import { process, riskManagement } from "@/lib/content";
+import { riskManagement } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Process & Risk",
@@ -25,27 +26,18 @@ export default function ProcessRiskPage() {
       {/* Investment process — high level */}
       <section className="border-b border-line bg-white">
         <div className="container-nl py-20">
-          <Reveal className="mb-10 max-w-2xl">
+          <Reveal className="mb-8 max-w-2xl">
             <Eyebrow>Investment process</Eyebrow>
             <h2 className="mt-4 text-3xl text-ink">Fundamental, bottom-up, catalyst-driven</h2>
             <p className="mt-4 text-[16px] leading-relaxed text-inksoft">
               From idea generation through to active monitoring — four connected stages, applied
-              consistently across the European credit spectrum.
+              consistently across the European credit spectrum. Select a stage to see what it means
+              at Northlight.
             </p>
           </Reveal>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {process.map((step, i) => (
-              <Reveal
-                key={step.title}
-                delay={i * 80}
-                className="border-l-2 border-l-steel bg-mist p-6"
-              >
-                <span className="block h-px w-8 bg-steel" />
-                <h3 className="mt-4 text-lg text-ink">{step.title}</h3>
-                <p className="mt-3 text-[14px] leading-relaxed text-inksoft">{step.body}</p>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <ProcessAccordion />
+          </Reveal>
         </div>
       </section>
 
@@ -60,8 +52,13 @@ export default function ProcessRiskPage() {
             </Reveal>
             <Reveal delay={120}>
               <ul className="grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
-                {riskManagement.points.map((point) => (
-                  <li key={point} className="bg-white p-5 text-[14px] leading-relaxed text-inksoft">
+                {riskManagement.points.map((point, i, arr) => (
+                  <li
+                    key={point}
+                    className={`bg-white p-5 text-[14px] leading-relaxed text-inksoft${
+                      i === arr.length - 1 && arr.length % 2 === 1 ? " sm:col-span-2" : ""
+                    }`}
+                  >
                     <span className="mb-2 block h-px w-6 bg-steel" />
                     {point}
                   </li>
