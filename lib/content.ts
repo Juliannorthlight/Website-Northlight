@@ -15,8 +15,7 @@ export const firm = {
 export const mainNav = [
   { href: "/about", label: "About" },
   { href: "/strategies", label: "Strategies" },
-  { href: "/process-risk", label: "Process & Risk" },
-  // { href: "/process", label: "Process" }, // old detailed process page — replaced by /process-risk (concise); code kept in app/_process
+  { href: "/process", label: "Process" },
   { href: "/team", label: "Team" },
   { href: "/news", label: "News" },
   { href: "/contact", label: "Contact" },
@@ -111,6 +110,62 @@ export const riskManagement = {
     "Defined position limits and drawdown controls",
   ],
 };
+
+// Circular process for the Process page — five connected stages, kept concise.
+// Monitoring feeds back into idea generation (hence the cycle). Risk detail folded in here.
+export const processCycle = [
+  {
+    n: "01",
+    title: "Idea Generation",
+    summary: "Sourcing opportunities across European credit.",
+    detail: [
+      "Screening the European high-yield and broader credit universe",
+      "Catalyst- and event-driven idea sourcing",
+      "Relative-value and market-driven leads",
+    ],
+  },
+  {
+    n: "02",
+    title: "Research",
+    summary: "Fundamental, bottom-up credit analysis.",
+    detail: [
+      "Free-cash-flow and downside modelling",
+      "Capital structure, covenants and recovery analysis",
+      "Direct dialogue with company management",
+    ],
+  },
+  {
+    n: "03",
+    title: "Portfolio Construction",
+    summary: "Conviction-weighted, sized to liquidity.",
+    detail: [
+      "Balanced long and short — roughly two-thirds long",
+      "Positions sized to liquidity and the asymmetry of return",
+      "Five return drivers for flexibility across conditions",
+    ],
+  },
+  {
+    n: "04",
+    title: "Risk Management",
+    summary: "Liquidity-led, capital-preservation first.",
+    detail: [
+      "Independent risk oversight with daily monitoring of exposures and liquidity",
+      "Systematic macro-overlay via CDS and index or equity options",
+      "Gross and net exposure actively managed to the market environment",
+      "Stress-tested against historical drawdowns, with defined position and drawdown limits",
+    ],
+  },
+  {
+    n: "05",
+    title: "Monitoring",
+    summary: "Active surveillance through the cycle.",
+    detail: [
+      "Positions revisited as catalysts play out or the thesis changes",
+      "Continuous reassessment of valuation, conditions and liquidity",
+      "Actively traded, not held passively — feeding the next ideas",
+    ],
+  },
+];
 
 export type ShareClass = {
   investorType: "Institutional" | "Retail";
