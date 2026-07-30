@@ -28,7 +28,7 @@ export default function HomePage() {
     <>
       <ScrollTopOnLoad />
       {/* ---------- Hero (pinned; content scrolls up over it) ---------- */}
-      <section className="sticky top-0 z-0 flex min-h-screen items-center overflow-hidden bg-ink text-white">
+      <section className="sticky top-0 z-0 flex min-h-[88vh] items-center overflow-hidden bg-ink text-white">
         <div
           className="absolute inset-0"
           style={{

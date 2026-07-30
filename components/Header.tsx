@@ -26,8 +26,10 @@ export function Header() {
 
   const isActive = (href: string) =>
     pathname === href || (href !== "/" && pathname.startsWith(href));
-  const isHome = pathname === "/";
-  const transparent = isHome && !scrolled && !open;
+  // Pages that open with a dark hero — the bar can start transparent over them.
+  // (Legal pages have a white top, so they keep the solid navy bar.)
+  const HERO_ROUTES = ["/", "/about", "/strategies", "/process", "/team", "/contact"];
+  const transparent = HERO_ROUTES.includes(pathname) && !scrolled && !open;
 
   return (
     <header
@@ -37,7 +39,11 @@ export function Header() {
     >
       <div className="container-nl flex h-[84px] items-center justify-between">
         <Link href="/" aria-label="Northlight Group — home" className="shrink-0">
-          <Logo className="h-11 w-auto text-white" />
+          <Logo
+            className={`w-auto text-white transition-all duration-300 ${
+              transparent ? "h-14" : "h-11"
+            }`}
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex lg:gap-8" aria-label="Primary">
