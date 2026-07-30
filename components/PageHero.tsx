@@ -20,7 +20,7 @@ export function PageHero({
   imagePosition?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink text-white">
+    <section className="sticky top-0 -z-10 min-h-[62vh] overflow-hidden bg-ink text-white">
       {image ? (
         <>
           <div
