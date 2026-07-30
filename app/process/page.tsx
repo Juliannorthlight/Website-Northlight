@@ -31,8 +31,8 @@ export default function ProcessPage() {
               Consistent, positive, uncorrelated returns — through disciplined repetition.
             </h2>
             <p className="mt-4 text-[16px] leading-relaxed text-inksoft">
-              Our process runs as a continuous cycle. Hover over or select any stage to see what it
-              means at Northlight.
+              From idea to exit and back again — one continuous loop, with capital preservation
+              built into every turn.
             </p>
           </Reveal>
           <Reveal>

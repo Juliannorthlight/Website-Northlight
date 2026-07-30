@@ -36,8 +36,8 @@ const arrows = nodes.map((_, i) => {
 const LABELS = [
   { left: "50%", top: "9%", cls: "-translate-x-1/2 -translate-y-1/2 w-36 text-center" },
   { left: "88%", top: "40.73%", cls: "-translate-y-1/2 w-24 text-left" },
-  { left: "70%", top: "90%", cls: "-translate-x-1/2 w-36 text-center" },
-  { left: "30%", top: "90%", cls: "-translate-x-1/2 w-36 text-center" },
+  { left: "70%", top: "87%", cls: "-translate-x-1/2 w-36 text-center" },
+  { left: "30%", top: "87%", cls: "-translate-x-1/2 w-36 text-center" },
   { left: "12%", top: "40.73%", cls: "-translate-x-full -translate-y-1/2 w-24 text-right" },
 ];
 
@@ -95,7 +95,7 @@ export function ProcessCircle() {
               key={d}
               d={d}
               fill="none"
-              stroke="#0B1B2E"
+              stroke="#2A5478"
               strokeWidth="1.4"
               strokeLinecap="round"
               style={{
@@ -110,7 +110,7 @@ export function ProcessCircle() {
             <path
               key={`${h.x}-${h.y}`}
               d="M -1.9 -1.7 L 1.9 0 L -1.9 1.7 Z"
-              fill="#0B1B2E"
+              fill="#2A5478"
               transform={`translate(${h.x.toFixed(2)} ${h.y.toFixed(2)}) rotate(${h.rot.toFixed(1)})`}
               style={{
                 opacity: drawn ? 1 : 0,
