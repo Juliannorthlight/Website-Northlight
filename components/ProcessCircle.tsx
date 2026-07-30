@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { processCycle } from "@/lib/content";
 
-// --- Geometry (SVG viewBox 0..100, container is square so % == viewBox units) ---
+// --- Geometry (SVG viewBox 0..100; container is square so % == viewBox units) ---
 const CENTER = 50;
-const R = 32; // ring radius
+const R = 30; // ring radius
 const N = processCycle.length; // 5
 const DEG = Math.PI / 180;
 const angle = (i: number) => (-90 + (360 / N) * i) * DEG; // start top, clockwise
@@ -19,13 +19,11 @@ const nodes = processCycle.map((_, i) => {
 
 const SEG_LEN = (2 * Math.PI * R) / N;
 
-// One arc segment (minor arc, clockwise) between each node and the next.
 const segments = nodes.map((n, i) => {
   const next = nodes[(i + 1) % N];
   return `M ${n.x.toFixed(2)} ${n.y.toFixed(2)} A ${R} ${R} 0 0 1 ${next.x.toFixed(2)} ${next.y.toFixed(2)}`;
 });
 
-// Arrowhead at the midpoint of each segment, rotated to the clockwise tangent.
 const arrows = nodes.map((_, i) => {
   const am = angle(i) + (360 / N / 2) * DEG;
   const x = posX(am);
@@ -34,14 +32,13 @@ const arrows = nodes.map((_, i) => {
   return { x, y, rot };
 });
 
-// Label placement per node (fixed 5), positioned OUTSIDE the ring so nothing
-// crosses the line: top above, sides beside, bottom two below-and-outward.
+// Labels sit OUTSIDE the ring: top above, sides clearly beside, bottom two below.
 const LABELS = [
-  { left: "50%", top: "8%", cls: "-translate-x-1/2 -translate-y-1/2 w-32 text-center" },
-  { left: "83%", top: "39.4%", cls: "-translate-y-1/2 w-24 text-left" },
-  { left: "72%", top: "90%", cls: "-translate-x-1/2 w-32 text-center" },
-  { left: "28%", top: "90%", cls: "-translate-x-1/2 w-32 text-center" },
-  { left: "17%", top: "39.4%", cls: "-translate-x-full -translate-y-1/2 w-24 text-right" },
+  { left: "50%", top: "5%", cls: "-translate-x-1/2 -translate-y-1/2 w-36 text-center" },
+  { left: "88%", top: "40.73%", cls: "-translate-y-1/2 w-24 text-left" },
+  { left: "70%", top: "93%", cls: "-translate-x-1/2 w-36 text-center" },
+  { left: "30%", top: "93%", cls: "-translate-x-1/2 w-36 text-center" },
+  { left: "12%", top: "40.73%", cls: "-translate-x-full -translate-y-1/2 w-24 text-right" },
 ];
 
 export function ProcessCircle() {
@@ -70,7 +67,7 @@ export function ProcessCircle() {
       { threshold: 0.35 }
     );
     obs.observe(el);
-    const t = setTimeout(() => setDrawn(true), 1600); // safety net
+    const t = setTimeout(() => setDrawn(true), 3400); // safety net (> full draw)
     return () => {
       obs.disconnect();
       clearTimeout(t);
@@ -81,12 +78,18 @@ export function ProcessCircle() {
 
   return (
     <div className="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-8">
-      {/* ---- Circle diagram (the star) ---- */}
+      <style>{`
+        @keyframes nlOrbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .nl-orbit { transform-box: view-box; transform-origin: 50% 50%; animation: nlOrbit 18s linear infinite; }
+        @media (prefers-reduced-motion: reduce) { .nl-orbit { animation: none; } }
+      `}</style>
+
+      {/* ---- Circle diagram ---- */}
       <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[520px]">
         <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden="true">
           {/* faint full-circle track */}
           <circle cx={CENTER} cy={CENTER} r={R} fill="none" stroke="#E7EBF0" strokeWidth="0.5" />
-          {/* animated navy arcs, drawn one after another on scroll */}
+          {/* navy arcs, drawn slowly one after another on scroll */}
           {segments.map((d, i) => (
             <path
               key={d}
@@ -98,7 +101,7 @@ export function ProcessCircle() {
               style={{
                 strokeDasharray: SEG_LEN,
                 strokeDashoffset: drawn ? 0 : SEG_LEN,
-                transition: `stroke-dashoffset 620ms ease-out ${i * 240}ms`,
+                transition: `stroke-dashoffset 900ms ease-out ${i * 420}ms`,
               }}
             />
           ))}
@@ -111,18 +114,16 @@ export function ProcessCircle() {
               transform={`translate(${h.x.toFixed(2)} ${h.y.toFixed(2)}) rotate(${h.rot.toFixed(1)})`}
               style={{
                 opacity: drawn ? 1 : 0,
-                transition: `opacity 300ms ease-out ${i * 240 + 380}ms`,
+                transition: `opacity 350ms ease-out ${i * 420 + 520}ms`,
               }}
             />
           ))}
+          {/* continuously orbiting marker — keeps the cycle "alive" */}
+          <g className="nl-orbit">
+            <circle cx={CENTER} cy={CENTER - R} r="3.2" fill="#3F6C94" opacity="0.22" />
+            <circle cx={CENTER} cy={CENTER - R} r="1.6" fill="#3F6C94" />
+          </g>
         </svg>
-
-        {/* Centre — big faint active number (changes on click) */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <span className="font-serif text-[72px] font-semibold leading-none text-ink/10">
-            {stage.n}
-          </span>
-        </div>
 
         {/* Number nodes */}
         {nodes.map((n, i) => {
@@ -134,16 +135,19 @@ export function ProcessCircle() {
               onClick={() => setActive(i)}
               aria-pressed={isActive}
               aria-label={processCycle[i].title}
-              className="absolute flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 font-serif text-[15px] font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-steel"
+              className="absolute flex items-center justify-center rounded-full font-serif font-semibold text-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-steel"
               style={{
                 left: `${n.x}%`,
                 top: `${n.y}%`,
-                ...(isActive
-                  ? { background: "#3F6C94", borderColor: "#3F6C94", color: "#fff", transform: "translate(-50%,-50%) scale(1.12)", boxShadow: "0 0 0 6px rgba(63,108,148,0.16)" }
-                  : { background: "#0B1B2E", borderColor: "#0B1B2E", color: "#fff" }),
+                height: isActive ? "3.6rem" : "3rem",
+                width: isActive ? "3.6rem" : "3rem",
+                fontSize: isActive ? "1.15rem" : "0.95rem",
+                background: isActive ? "#1c3b5c" : "#0B1B2E",
+                transform: "translate(-50%,-50%)",
+                boxShadow: isActive ? "0 0 0 6px rgba(63,108,148,0.18)" : "none",
               }}
             >
-              {processCycle[i].n}
+              {i + 1}
             </button>
           );
         })}
@@ -158,8 +162,8 @@ export function ProcessCircle() {
               type="button"
               onClick={() => setActive(i)}
               tabIndex={-1}
-              className={`absolute text-[12.5px] font-medium leading-tight transition-colors ${L.cls} ${
-                isActive ? "text-ink" : "text-inksoft hover:text-ink"
+              className={`absolute text-[14.5px] font-semibold leading-tight transition-colors ${L.cls} ${
+                isActive ? "text-steeldeep" : "text-ink hover:text-steeldeep"
               }`}
               style={{ left: L.left, top: L.top }}
             >
@@ -169,10 +173,10 @@ export function ProcessCircle() {
         })}
       </div>
 
-      {/* ---- Detail panel (lighter, secondary to the circle) ---- */}
+      {/* ---- Detail panel (secondary to the circle) ---- */}
       <div className="border-l-2 border-l-steel pl-6 md:pl-7">
         <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-steeldeep">
-          Stage {stage.n}
+          Stage {active + 1} of {N}
         </span>
         <h3 className="mt-2 text-2xl text-ink md:text-[26px]">{stage.title}</h3>
         <p className="mt-3 text-[15px] leading-relaxed text-inksoft">{stage.summary}</p>
