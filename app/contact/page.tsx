@@ -1,9 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { PageHero } from "@/components/PageHero";
 import { Eyebrow } from "@/components/ui";
 import { firm } from "@/lib/content";
+
+// Leaflet needs the browser — load the map client-side only.
+const LocationMap = dynamic(() => import("@/components/LocationMap"), { ssr: false });
 
 // Formspree endpoint — delivers submissions to Investor Relations.
 const FORM_ENDPOINT = "https://formspree.io/f/xvzjwzbd";
@@ -74,14 +78,9 @@ export default function ContactPage() {
               </div>
             </dl>
 
-            {/* OpenStreetMap embed — interactive, sets no tracking cookies */}
+            {/* CARTO Positron map via Leaflet — interactive, no tracking cookies */}
             <div className="mt-8 overflow-hidden border border-line">
-              <iframe
-                title={`Map of ${firm.legalName}, ${firm.mapsQuery}`}
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1414%2C51.5087%2C-0.1334%2C51.5123&layer=mapnik&marker=51.5105108%2C-0.1374362"
-                className="block h-[320px] w-full grayscale-[0.15]"
-                loading="lazy"
-              />
+              <LocationMap />
             </div>
             <a
               href={`https://www.google.com/maps?q=${encodeURIComponent(firm.mapsQuery)}`}
