@@ -3,6 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 import { Eyebrow, ButtonLink, ArrowRight } from "@/components/ui";
 import { ContactCTA } from "@/components/ContactCTA";
+import { ScrollTopOnLoad } from "@/components/ScrollTopOnLoad";
 import { process, strategies } from "@/lib/content";
 
 // Home statement numbers — the two headline metrics count up on first view.
@@ -25,6 +26,7 @@ const homeTeamStats: { value: React.ReactNode; label: string }[] = [
 export default function HomePage() {
   return (
     <>
+      <ScrollTopOnLoad />
       {/* ---------- Hero (pinned; content scrolls up over it) ---------- */}
       <section className="sticky top-0 z-0 flex min-h-screen items-center overflow-hidden bg-ink text-white">
         <div

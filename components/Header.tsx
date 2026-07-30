@@ -31,8 +31,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 text-white transition-colors duration-300 ${
-        transparent ? "bg-transparent" : "bg-ink shadow-sm shadow-black/20"
+      className={`fixed inset-x-0 top-0 z-50 text-white transition-all duration-300 ease-out ${
+        transparent ? "translate-y-6 bg-transparent" : "translate-y-0 bg-ink shadow-sm shadow-black/20"
       }`}
     >
       <div className="container-nl flex h-[84px] items-center justify-between">
