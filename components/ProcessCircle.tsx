@@ -3,18 +3,46 @@
 import { useEffect, useRef, useState } from "react";
 import { processCycle } from "@/lib/content";
 
-// Node centre positions as a percentage of the square container.
-// Five stages evenly spaced around a ring, starting at the top, going clockwise.
-const NODES = [
-  { left: 50, top: 16 },
-  { left: 82.3, top: 39.5 },
-  { left: 70, top: 77.5 },
-  { left: 30, top: 77.5 },
-  { left: 17.7, top: 39.5 },
-];
+// --- Geometry (SVG viewBox 0..100, container is square so % == viewBox units) ---
+const CENTER = 50;
+const R = 32; // ring radius
+const N = processCycle.length; // 5
+const DEG = Math.PI / 180;
+const angle = (i: number) => (-90 + (360 / N) * i) * DEG; // start top, clockwise
+const posX = (a: number) => CENTER + R * Math.cos(a);
+const posY = (a: number) => CENTER + R * Math.sin(a);
 
-const RING_R = 34; // radius in the 100x100 SVG viewBox
-const CIRC = 2 * Math.PI * RING_R;
+const nodes = processCycle.map((_, i) => {
+  const a = angle(i);
+  return { x: posX(a), y: posY(a) };
+});
+
+const SEG_LEN = (2 * Math.PI * R) / N;
+
+// One arc segment (minor arc, clockwise) between each node and the next.
+const segments = nodes.map((n, i) => {
+  const next = nodes[(i + 1) % N];
+  return `M ${n.x.toFixed(2)} ${n.y.toFixed(2)} A ${R} ${R} 0 0 1 ${next.x.toFixed(2)} ${next.y.toFixed(2)}`;
+});
+
+// Arrowhead at the midpoint of each segment, rotated to the clockwise tangent.
+const arrows = nodes.map((_, i) => {
+  const am = angle(i) + (360 / N / 2) * DEG;
+  const x = posX(am);
+  const y = posY(am);
+  const rot = (Math.atan2(Math.cos(am), -Math.sin(am)) * 180) / Math.PI;
+  return { x, y, rot };
+});
+
+// Label placement per node (fixed 5), positioned OUTSIDE the ring so nothing
+// crosses the line: top above, sides beside, bottom two below-and-outward.
+const LABELS = [
+  { left: "50%", top: "8%", cls: "-translate-x-1/2 -translate-y-1/2 w-32 text-center" },
+  { left: "83%", top: "39.4%", cls: "-translate-y-1/2 w-24 text-left" },
+  { left: "72%", top: "90%", cls: "-translate-x-1/2 w-32 text-center" },
+  { left: "28%", top: "90%", cls: "-translate-x-1/2 w-32 text-center" },
+  { left: "17%", top: "39.4%", cls: "-translate-x-full -translate-y-1/2 w-24 text-right" },
+];
 
 export function ProcessCircle() {
   const [active, setActive] = useState(0);
@@ -22,7 +50,6 @@ export function ProcessCircle() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Reduced motion → reveal immediately, no draw.
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       setDrawn(true);
@@ -43,8 +70,7 @@ export function ProcessCircle() {
       { threshold: 0.35 }
     );
     obs.observe(el);
-    // Safety net: never leave the diagram hidden if the observer doesn't fire.
-    const t = setTimeout(() => setDrawn(true), 1400);
+    const t = setTimeout(() => setDrawn(true), 1600); // safety net
     return () => {
       obs.disconnect();
       clearTimeout(t);
@@ -54,85 +80,101 @@ export function ProcessCircle() {
   const stage = processCycle[active];
 
   return (
-    <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-      {/* Circle diagram */}
-      <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[440px]">
+    <div className="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-8">
+      {/* ---- Circle diagram (the star) ---- */}
+      <div ref={ref} className="relative mx-auto aspect-square w-full max-w-[520px]">
         <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden="true">
-          {/* Track */}
-          <circle cx="50" cy="50" r={RING_R} fill="none" stroke="#DCE2E8" strokeWidth="0.5" />
-          {/* Drawn ring — animates clockwise from the top on scroll into view */}
-          <circle
-            cx="50"
-            cy="50"
-            r={RING_R}
-            fill="none"
-            stroke="#5E8DB8"
-            strokeWidth="1"
-            strokeLinecap="round"
-            transform="rotate(-90 50 50)"
-            style={{
-              strokeDasharray: CIRC,
-              strokeDashoffset: drawn ? 0 : CIRC,
-              transition: "stroke-dashoffset 1300ms ease-out",
-            }}
-          />
+          {/* faint full-circle track */}
+          <circle cx={CENTER} cy={CENTER} r={R} fill="none" stroke="#E7EBF0" strokeWidth="0.5" />
+          {/* animated navy arcs, drawn one after another on scroll */}
+          {segments.map((d, i) => (
+            <path
+              key={d}
+              d={d}
+              fill="none"
+              stroke="#0B1B2E"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+              style={{
+                strokeDasharray: SEG_LEN,
+                strokeDashoffset: drawn ? 0 : SEG_LEN,
+                transition: `stroke-dashoffset 620ms ease-out ${i * 240}ms`,
+              }}
+            />
+          ))}
+          {/* arrowheads forming after each arc */}
+          {arrows.map((h, i) => (
+            <path
+              key={`${h.x}-${h.y}`}
+              d="M -1.9 -1.7 L 1.9 0 L -1.9 1.7 Z"
+              fill="#0B1B2E"
+              transform={`translate(${h.x.toFixed(2)} ${h.y.toFixed(2)}) rotate(${h.rot.toFixed(1)})`}
+              style={{
+                opacity: drawn ? 1 : 0,
+                transition: `opacity 300ms ease-out ${i * 240 + 380}ms`,
+              }}
+            />
+          ))}
         </svg>
 
-        {/* Centre cycle mark */}
+        {/* Centre — big faint active number (changes on click) */}
         <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <span className="block text-2xl leading-none text-steel">&#8635;</span>
-          <span className="mt-1.5 block text-[10px] uppercase tracking-[0.14em] text-muted">
-            Continuous
-            <br />
-            cycle
+          <span className="font-serif text-[72px] font-semibold leading-none text-ink/10">
+            {stage.n}
           </span>
         </div>
 
-        {/* Stage nodes */}
-        {processCycle.map((s, i) => {
-          const pos = NODES[i];
+        {/* Number nodes */}
+        {nodes.map((n, i) => {
           const isActive = i === active;
           return (
             <button
-              key={s.title}
+              key={processCycle[i].title}
               type="button"
               onClick={() => setActive(i)}
               aria-pressed={isActive}
-              className="absolute flex w-24 -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 text-center focus:outline-none"
+              aria-label={processCycle[i].title}
+              className="absolute flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 font-serif text-[15px] font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-steel"
               style={{
-                left: `${pos.left}%`,
-                top: `${pos.top}%`,
-                opacity: drawn ? 1 : 0,
-                transition: `opacity 500ms ease-out ${250 + i * 130}ms`,
+                left: `${n.x}%`,
+                top: `${n.y}%`,
+                ...(isActive
+                  ? { background: "#3F6C94", borderColor: "#3F6C94", color: "#fff", transform: "translate(-50%,-50%) scale(1.12)", boxShadow: "0 0 0 6px rgba(63,108,148,0.16)" }
+                  : { background: "#0B1B2E", borderColor: "#0B1B2E", color: "#fff" }),
               }}
             >
-              <span
-                className={`flex h-9 w-9 items-center justify-center rounded-full border text-[13px] font-semibold transition-colors ${
-                  isActive
-                    ? "border-steel bg-steel text-white"
-                    : "border-line bg-white text-steeldeep group-hover:border-steel"
-                }`}
-              >
-                {s.n}
-              </span>
-              <span
-                className={`text-[12px] font-medium leading-tight transition-colors ${
-                  isActive ? "text-ink" : "text-inksoft"
-                }`}
-              >
-                {s.title}
-              </span>
+              {processCycle[i].n}
+            </button>
+          );
+        })}
+
+        {/* Labels (outside the ring) */}
+        {processCycle.map((s, i) => {
+          const L = LABELS[i];
+          const isActive = i === active;
+          return (
+            <button
+              key={`lbl-${s.title}`}
+              type="button"
+              onClick={() => setActive(i)}
+              tabIndex={-1}
+              className={`absolute text-[12.5px] font-medium leading-tight transition-colors ${L.cls} ${
+                isActive ? "text-ink" : "text-inksoft hover:text-ink"
+              }`}
+              style={{ left: L.left, top: L.top }}
+            >
+              {s.title}
             </button>
           );
         })}
       </div>
 
-      {/* Detail panel */}
-      <div className="border-l-2 border-l-steel bg-mist p-7 md:p-9">
+      {/* ---- Detail panel (lighter, secondary to the circle) ---- */}
+      <div className="border-l-2 border-l-steel pl-6 md:pl-7">
         <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-steeldeep">
           Stage {stage.n}
         </span>
-        <h3 className="mt-2 text-2xl text-ink md:text-[28px]">{stage.title}</h3>
+        <h3 className="mt-2 text-2xl text-ink md:text-[26px]">{stage.title}</h3>
         <p className="mt-3 text-[15px] leading-relaxed text-inksoft">{stage.summary}</p>
         <ul className="mt-5 space-y-3">
           {stage.detail.map((d) => (
