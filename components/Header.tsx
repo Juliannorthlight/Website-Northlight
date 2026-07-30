@@ -9,17 +9,32 @@ import { mainNav } from "@/lib/content";
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Close the mobile menu on route change.
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  // Switch the bar from transparent (blended into the hero) to solid navy on scroll.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const isActive = (href: string) =>
     pathname === href || (href !== "/" && pathname.startsWith(href));
+  const isHome = pathname === "/";
+  const transparent = isHome && !scrolled && !open;
 
   return (
-    <header className="sticky top-0 z-50 bg-ink text-white">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 text-white transition-colors duration-300 ${
+        transparent ? "bg-transparent" : "bg-ink shadow-sm shadow-black/20"
+      }`}
+    >
       <div className="container-nl flex h-[84px] items-center justify-between">
         <Link href="/" aria-label="Northlight Group — home" className="shrink-0">
           <Logo className="h-11 w-auto text-white" />

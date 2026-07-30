@@ -23,7 +23,7 @@ export default function LegalPage({ params }: { params: { slug: string } }) {
 
   return (
     <section className="bg-white">
-      <div className="container-nl py-14 md:py-20">
+      <div className="container-nl pb-14 pt-[116px] md:pb-20 md:pt-[140px]">
         <div className="grid gap-12 md:grid-cols-[230px_1fr] lg:gap-16">
           {/* Left index — mirrors the firm's previous disclosures menu */}
           <aside className="md:border-r md:border-line md:pr-8">

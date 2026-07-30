@@ -25,8 +25,8 @@ const homeTeamStats: { value: React.ReactNode; label: string }[] = [
 export default function HomePage() {
   return (
     <>
-      {/* ---------- Hero ---------- */}
-      <section className="relative overflow-hidden bg-ink text-white">
+      {/* ---------- Hero (pinned; content scrolls up over it) ---------- */}
+      <section className="sticky top-0 z-0 flex min-h-screen items-center overflow-hidden bg-ink text-white">
         <div
           className="absolute inset-0"
           style={{
@@ -48,7 +48,7 @@ export default function HomePage() {
               "linear-gradient(90deg,rgba(8,21,36,0.9) 0%,rgba(8,21,36,0.52) 44%,rgba(11,27,46,0.08) 100%)",
           }}
         />
-        <div className="container-nl relative z-10 py-24 md:py-32">
+        <div className="container-nl relative z-10 w-full py-28">
           <div className="max-w-3xl">
             <Eyebrow light>Northlight Group · European Credit Investing</Eyebrow>
             <h1 className="mt-5 text-4xl leading-[1.08] md:text-[52px] md:leading-[1.06]">
@@ -83,6 +83,8 @@ export default function HomePage() {
         </span>
       </section>
 
+      {/* Content block — scrolls up over the pinned hero above */}
+      <div className="relative z-10 bg-white">
       {/* ---------- Who we are (navy accent block) ---------- */}
       <section className="border-b border-line bg-white">
         <div className="container-nl py-20 md:py-24">
@@ -281,6 +283,7 @@ export default function HomePage() {
 
       {/* ---------- Contact ---------- */}
       <ContactCTA />
+      </div>
     </>
   );
 }
