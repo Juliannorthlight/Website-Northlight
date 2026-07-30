@@ -257,7 +257,7 @@ export default function HomePage() {
                 style={{ background: "linear-gradient(155deg,#2a6aa8 0%,#0B1B2E 95%)", opacity: 0.4 }}
               />
               <span className="absolute bottom-3 right-3 bg-ink/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/80">
-                Placeholder · Regent Street, W1
+                Regent Street, London W1
               </span>
             </div>
           </Reveal>
