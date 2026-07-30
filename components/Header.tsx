@@ -20,9 +20,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-ink text-white">
-      <div className="container-nl flex h-[68px] items-center justify-between">
+      <div className="container-nl flex h-[84px] items-center justify-between">
         <Link href="/" aria-label="Northlight Group — home" className="shrink-0">
-          <Logo className="h-7 w-auto text-white" />
+          <Logo className="h-11 w-auto text-white" />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex lg:gap-8" aria-label="Primary">

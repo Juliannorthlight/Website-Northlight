@@ -17,7 +17,7 @@ export const mainNav = [
   { href: "/strategies", label: "Strategies" },
   { href: "/process", label: "Process" },
   { href: "/team", label: "Team" },
-  { href: "/news", label: "News" },
+  // { href: "/news", label: "News" }, // removed per chef feedback 2026-07-30 — kept for easy restore (page archived at app/_news)
   { href: "/contact", label: "Contact" },
 ];
 

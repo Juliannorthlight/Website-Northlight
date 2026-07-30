@@ -74,16 +74,23 @@ export default function ContactPage() {
               </div>
             </dl>
 
-            {/* Google Maps embed — no API key required */}
+            {/* OpenStreetMap embed — interactive, sets no tracking cookies */}
             <div className="mt-8 overflow-hidden border border-line">
               <iframe
                 title={`Map of ${firm.legalName}, ${firm.mapsQuery}`}
-                src={`https://www.google.com/maps?q=${encodeURIComponent(firm.mapsQuery)}&output=embed`}
-                className="block h-[320px] w-full grayscale-[0.2]"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1414%2C51.5087%2C-0.1334%2C51.5123&layer=mapnik&marker=51.5105108%2C-0.1374362"
+                className="block h-[320px] w-full grayscale-[0.15]"
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
+            <a
+              href={`https://www.google.com/maps?q=${encodeURIComponent(firm.mapsQuery)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-steeldeep hover:text-ink"
+            >
+              Open in Google Maps ↗
+            </a>
           </div>
 
           {/* Enquiry form */}
