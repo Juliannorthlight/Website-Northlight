@@ -22,10 +22,11 @@ export default function LocationMap() {
       scrollWheelZoom: false, // don't hijack page scroll
     });
     mapRef.current = map;
+    map.attributionControl.setPrefix(false); // remove the "Leaflet" credit (not required)
 
     L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
       attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: "abcd",
       maxZoom: 20,
     }).addTo(map);
@@ -47,11 +48,23 @@ export default function LocationMap() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      role="img"
-      aria-label="Map showing Northlight Group at 33 Glasshouse Street, London"
-      className="h-[320px] w-full"
-    />
+    <>
+      <style>{`
+        .leaflet-control-attribution {
+          font-size: 8px !important;
+          line-height: 1.4 !important;
+          padding: 0 4px !important;
+          background: rgba(255,255,255,0.55) !important;
+          color: #9aa4ae !important;
+        }
+        .leaflet-control-attribution a { color: #9aa4ae !important; text-decoration: none !important; }
+      `}</style>
+      <div
+        ref={containerRef}
+        role="img"
+        aria-label="Map showing Northlight Group at 33 Glasshouse Street, London"
+        className="h-[320px] w-full"
+      />
+    </>
   );
 }
