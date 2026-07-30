@@ -31,8 +31,7 @@ export default function ProcessPage() {
               Consistent, positive, uncorrelated returns — through disciplined repetition.
             </h2>
             <p className="mt-4 text-[16px] leading-relaxed text-inksoft">
-              From idea to exit and back again — one continuous loop, with capital preservation
-              built into every turn.
+              One continuous loop, with capital preservation built into every stage.
             </p>
           </Reveal>
           <Reveal>
