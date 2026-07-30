@@ -34,10 +34,10 @@ const arrows = nodes.map((_, i) => {
 
 // Labels sit OUTSIDE the ring: top above, sides clearly beside, bottom two below.
 const LABELS = [
-  { left: "50%", top: "5%", cls: "-translate-x-1/2 -translate-y-1/2 w-36 text-center" },
+  { left: "50%", top: "9%", cls: "-translate-x-1/2 -translate-y-1/2 w-36 text-center" },
   { left: "88%", top: "40.73%", cls: "-translate-y-1/2 w-24 text-left" },
-  { left: "70%", top: "93%", cls: "-translate-x-1/2 w-36 text-center" },
-  { left: "30%", top: "93%", cls: "-translate-x-1/2 w-36 text-center" },
+  { left: "70%", top: "90%", cls: "-translate-x-1/2 w-36 text-center" },
+  { left: "30%", top: "90%", cls: "-translate-x-1/2 w-36 text-center" },
   { left: "12%", top: "40.73%", cls: "-translate-x-full -translate-y-1/2 w-24 text-right" },
 ];
 
@@ -120,8 +120,7 @@ export function ProcessCircle() {
           ))}
           {/* continuously orbiting marker — keeps the cycle "alive" */}
           <g className="nl-orbit">
-            <circle cx={CENTER} cy={CENTER - R} r="3.2" fill="#3F6C94" opacity="0.22" />
-            <circle cx={CENTER} cy={CENTER - R} r="1.6" fill="#3F6C94" />
+            <circle cx={CENTER} cy={CENTER - R} r="1.9" fill="#0B1B2E" />
           </g>
         </svg>
 
@@ -133,6 +132,7 @@ export function ProcessCircle() {
               key={processCycle[i].title}
               type="button"
               onClick={() => setActive(i)}
+              onMouseEnter={() => setActive(i)}
               aria-pressed={isActive}
               aria-label={processCycle[i].title}
               className="absolute flex items-center justify-center rounded-full font-serif font-semibold text-white transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-steel"
@@ -161,6 +161,7 @@ export function ProcessCircle() {
               key={`lbl-${s.title}`}
               type="button"
               onClick={() => setActive(i)}
+              onMouseEnter={() => setActive(i)}
               tabIndex={-1}
               className={`absolute text-[14.5px] font-semibold leading-tight transition-colors ${L.cls} ${
                 isActive ? "text-steeldeep" : "text-ink hover:text-steeldeep"

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { Eyebrow } from "@/components/ui";
+import { Eyebrow, ArrowRight } from "@/components/ui";
 import { ProcessCircle } from "@/components/ProcessCircle";
 import { ContactCTA } from "@/components/ContactCTA";
 
@@ -26,13 +27,24 @@ export default function ProcessPage() {
         <div className="container-nl py-20">
           <Reveal className="mb-12 max-w-2xl">
             <Eyebrow>How we invest</Eyebrow>
-            <h2 className="mt-4 text-3xl text-ink">Five connected stages</h2>
+            <h2 className="mt-4 text-3xl leading-tight text-ink text-balance md:text-[34px]">
+              Consistent, positive, uncorrelated returns — through disciplined repetition.
+            </h2>
             <p className="mt-4 text-[16px] leading-relaxed text-inksoft">
-              Select any stage to see what it means at Northlight.
+              Our process runs as a continuous cycle. Hover over or select any stage to see what it
+              means at Northlight.
             </p>
           </Reveal>
           <Reveal>
             <ProcessCircle />
+          </Reveal>
+          <Reveal className="mt-16 border-t border-line pt-8">
+            <Link
+              href="/strategies"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-steeldeep hover:text-ink"
+            >
+              See how this process shapes our funds <ArrowRight />
+            </Link>
           </Reveal>
         </div>
       </section>
