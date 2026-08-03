@@ -51,7 +51,7 @@ export function PageHero({
         </>
       )}
 
-      <div className="container-nl relative z-10 pb-20 pt-[124px] md:pb-24 md:pt-[148px]">
+      <div className="nl-hero-in container-nl relative z-10 pb-20 pt-[124px] md:pb-24 md:pt-[148px]">
         <Eyebrow light>{eyebrow}</Eyebrow>
         <h1 className="mt-4 max-w-3xl text-4xl leading-[1.08] md:text-5xl">{title}</h1>
         {intro && (

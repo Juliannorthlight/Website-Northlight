@@ -76,3 +76,23 @@
     transition: none;
   }
 }
+
+/* Interior page hero: let the image breathe, then fade the heading in after a pause */
+@keyframes nlHeroIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.nl-hero-in {
+  animation: nlHeroIn 0.9s ease-out 1.5s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nl-hero-in {
+    animation: none;
+  }
+}
