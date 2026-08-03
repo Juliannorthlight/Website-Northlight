@@ -89,7 +89,7 @@
   }
 }
 .nl-hero-in {
-  animation: nlHeroIn 0.9s ease-out 1s both;
+  animation: nlHeroIn 0.9s ease-out 0.75s both;
 }
 @media (prefers-reduced-motion: reduce) {
   .nl-hero-in {
