@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { StrategyTabs } from "@/components/StrategyTabs";
+import { StrategyShowcase } from "@/components/StrategyShowcase";
 import { ContactCTA } from "@/components/ContactCTA";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function StrategiesPage() {
         imagePosition="center"
       />
 
-      <StrategyTabs />
+      <StrategyShowcase />
 
       <section className="bg-white">
         <div className="container-nl py-10">

@@ -2,23 +2,26 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Counts up to `end` the first time it scrolls into view. Falls back to the
-// final value immediately when reduced motion is requested or IO is missing.
+// Counts from `start` up to `end` the first time it scrolls into view. `start`
+// lets the number begin part-way up (so a low "0" is never shown). Falls back to
+// the final value immediately when reduced motion is requested or IO is missing.
 export function CountUp({
   end,
+  start = 0,
   suffix = "",
   prefix = "",
   duration = 1500,
   className = "",
 }: {
   end: number;
+  start?: number;
   suffix?: string;
   prefix?: string;
   duration?: number;
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(start);
   const started = useRef(false);
 
   useEffect(() => {
@@ -38,11 +41,13 @@ export function CountUp({
         entries.forEach((entry) => {
           if (entry.isIntersecting && !started.current) {
             started.current = true;
-            const start = Date.now();
+            const t0 = Date.now();
             timer = setInterval(() => {
-              const p = Math.min(1, (Date.now() - start) / duration);
-              const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
-              setValue(Math.round(eased * end));
+              const p = Math.min(1, (Date.now() - t0) / duration);
+              // easeOutCubic — moves immediately and glides to the target, so the
+              // number never appears to sit still at the start before climbing.
+              const eased = 1 - Math.pow(1 - p, 3);
+              setValue(Math.round(start + eased * (end - start)));
               if (p >= 1 && timer) clearInterval(timer);
             }, 20);
             // safety net: never leave it stuck below the target
@@ -51,7 +56,7 @@ export function CountUp({
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.25 }
     );
     obs.observe(el);
     return () => {
@@ -59,7 +64,7 @@ export function CountUp({
       if (timer) clearInterval(timer);
       if (safety) clearTimeout(safety);
     };
-  }, [end, duration]);
+  }, [end, start, duration]);
 
   return (
     <span ref={ref} className={className}>

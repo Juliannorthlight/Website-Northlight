@@ -25,7 +25,7 @@ export default function ProcessPage() {
 
       <section className="border-b border-line bg-white">
         <div className="container-nl py-20">
-          <Reveal className="mb-12 max-w-2xl">
+          <Reveal variant="left" className="mb-12 max-w-2xl">
             <Eyebrow>How we invest</Eyebrow>
             <h2 className="mt-4 text-3xl leading-tight text-ink text-balance md:text-[34px]">
               Consistent, positive, uncorrelated returns — through disciplined repetition.

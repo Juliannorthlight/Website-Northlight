@@ -10,6 +10,10 @@
     @apply bg-white text-inktext font-sans antialiased;
     font-weight: 420;
     text-rendering: optimizeLegibility;
+    /* The fly-in reveals start well off-screen; clip horizontal overflow so they
+       never spawn a horizontal scrollbar. `clip` (not hidden/auto) keeps the
+       pinned sticky heroes working. */
+    overflow-x: clip;
   }
   h1,
   h2,
@@ -64,10 +68,10 @@
   transform: translateY(20px);
 }
 .reveal-left {
-  transform: translateX(-110px);
+  transform: translateX(-190px);
 }
 .reveal-right {
-  transform: translateX(110px);
+  transform: translateX(190px);
 }
 .reveal-line {
   opacity: 1;

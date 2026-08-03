@@ -74,8 +74,6 @@ export function ProcessCircle() {
     };
   }, []);
 
-  const stage = processCycle[active];
-
   return (
     <div className="grid items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-8">
       <style>{`
@@ -174,21 +172,39 @@ export function ProcessCircle() {
         })}
       </div>
 
-      {/* ---- Detail panel (secondary to the circle) ---- */}
+      {/* ---- Detail panel (secondary to the circle) ----
+           All five stages are stacked in the same grid cell, so the panel always
+           reserves the height of the tallest one. That keeps the steel accent line
+           identical for every stage, and lets the active copy cross-fade in. */}
       <div className="border-l-2 border-l-steel pl-6 md:pl-7">
-        <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-steeldeep">
-          Stage {active + 1} of {N}
-        </span>
-        <h3 className="mt-2 text-2xl text-ink md:text-[26px]">{stage.title}</h3>
-        <p className="mt-3 text-[15px] leading-relaxed text-inksoft">{stage.summary}</p>
-        <ul className="mt-5 space-y-3">
-          {stage.detail.map((d) => (
-            <li key={d} className="relative pl-5 text-[14px] leading-relaxed text-inksoft">
-              <span className="absolute left-0 top-[9px] h-px w-2.5 bg-steel" />
-              {d}
-            </li>
-          ))}
-        </ul>
+        <div className="grid">
+          {processCycle.map((st, i) => {
+            const isActive = i === active;
+            return (
+              <div
+                key={st.title}
+                aria-hidden={!isActive}
+                className={`col-start-1 row-start-1 transition-opacity duration-300 ${
+                  isActive ? "opacity-100" : "pointer-events-none opacity-0"
+                }`}
+              >
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.14em] text-steeldeep">
+                  Stage {i + 1} of {N}
+                </span>
+                <h3 className="mt-2 text-2xl text-ink md:text-[26px]">{st.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-inksoft">{st.summary}</p>
+                <ul className="mt-5 space-y-3">
+                  {st.detail.map((d) => (
+                    <li key={d} className="relative pl-5 text-[14px] leading-relaxed text-inksoft">
+                      <span className="absolute left-0 top-[9px] h-px w-2.5 bg-steel" />
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

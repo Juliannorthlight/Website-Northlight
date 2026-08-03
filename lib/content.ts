@@ -13,7 +13,7 @@ export const firm = {
 };
 
 export const mainNav = [
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About Us" },
   { href: "/strategies", label: "Strategies" },
   { href: "/process", label: "Process" },
   { href: "/team", label: "Team" },
@@ -199,8 +199,8 @@ export const strategies: Strategy[] = [
     headline: { label: "Focus", value: "Absolute, uncorrelated returns" },
     meta: [
       { label: "Structure", value: "Cayman" },
-      { label: "Liquidity", value: "Monthly" },
       { label: "Track record", value: "16-year" },
+      { label: "Liquidity", value: "Monthly" },
     ],
     points: [
       "Invests across European high-yield bonds, loans and credit derivatives",
@@ -222,8 +222,8 @@ export const strategies: Strategy[] = [
     headline: { label: "Target", value: "High single-digit returns" },
     meta: [
       { label: "Structure", value: "UCITS" },
-      { label: "Liquidity", value: "Weekly" },
       { label: "Track record", value: "Since 2019" },
+      { label: "Liquidity", value: "Weekly" },
       { label: "Target", value: "High single-digit returns" },
     ],
     points: [

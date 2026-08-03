@@ -3,7 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 import { Eyebrow, ButtonLink, ArrowRight } from "@/components/ui";
 import { ContactCTA } from "@/components/ContactCTA";
-import { ScrollProgressLine } from "@/components/ScrollProgressLine";
+import { SectionRail } from "@/components/SectionRail";
 import { process, strategies } from "@/lib/content";
 
 // Home statement numbers — the two headline metrics count up on first view.
@@ -12,14 +12,14 @@ const bandStats: {
   label: string;
 }[] = [
   { value: "2009", label: "Founded in London" },
-  { value: <CountUp end={16} suffix="yr" />, label: "Flagship track record" },
-  { value: <CountUp end={90} suffix="+" />, label: "Years of combined credit experience" },
+  { value: <CountUp end={16} start={2} suffix="yr" duration={1400} />, label: "Flagship track record" },
+  { value: <CountUp end={90} start={2} suffix="+" duration={1400} />, label: "Years of combined credit experience" },
 ];
 
 // Home team teaser — same connected rail + count-up as the Team page.
 const homeTeamStats: { value: React.ReactNode; label: string }[] = [
-  { value: <CountUp end={90} suffix="+" />, label: "Years of combined credit experience" },
-  { value: <CountUp end={7} />, label: "Languages spoken across the team" },
+  { value: <CountUp end={90} start={2} suffix="+" duration={1400} />, label: "Years of combined credit experience" },
+  { value: <CountUp end={7} start={1} duration={1400} />, label: "Languages spoken across the team" },
   { value: "2009", label: "Investing together since" },
 ];
 
@@ -87,9 +87,10 @@ export default function HomePage() {
       {/* Content block — scrolls up over the pinned hero above */}
       <div className="relative z-10 bg-white">
       {/* ---------- Who we are (editorial, animated) ---------- */}
-      <section className="border-b border-line bg-white">
+      {/* Accent rail on the LEFT — the journey begins here. */}
+      <section className="relative border-b border-line bg-white">
+        <SectionRail side="left" />
         <div className="container-nl relative py-24 md:py-32">
-          <ScrollProgressLine />
           <div className="grid gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
             <div>
               <Eyebrow>Who we are</Eyebrow>
@@ -216,7 +217,9 @@ export default function HomePage() {
       )}
 
       {/* ---------- Team ---------- */}
-      <section className="border-b border-line bg-mist">
+      {/* Rail switches back to the LEFT at the "Our team" band. */}
+      <section className="relative border-b border-line bg-mist">
+        <SectionRail side="left" />
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1fr_1fr] md:py-24">
           <div>
             <Eyebrow>Our team</Eyebrow>
