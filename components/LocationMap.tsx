@@ -63,7 +63,7 @@ export default function LocationMap() {
         ref={containerRef}
         role="img"
         aria-label="Map showing Northlight Group at 33 Glasshouse Street, London"
-        className="h-[320px] w-full"
+        className="h-full min-h-[300px] w-full"
       />
     </>
   );

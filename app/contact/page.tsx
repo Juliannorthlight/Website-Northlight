@@ -77,19 +77,6 @@ export default function ContactPage() {
                 </dd>
               </div>
             </dl>
-
-            {/* CARTO Positron map via Leaflet — interactive, no tracking cookies */}
-            <div className="mt-8 overflow-hidden border border-line">
-              <LocationMap />
-            </div>
-            <a
-              href={`https://www.google.com/maps?q=${encodeURIComponent(firm.mapsQuery)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-steeldeep hover:text-ink"
-            >
-              Open in Google Maps ↗
-            </a>
           </div>
 
           {/* Enquiry form */}
@@ -201,6 +188,23 @@ export default function ContactPage() {
               </form>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* Full-width map band */}
+      <section aria-label="Northlight Group location" className="border-t border-line bg-white">
+        <div className="h-[320px] w-full sm:h-[440px]">
+          <LocationMap />
+        </div>
+        <div className="container-nl py-4 text-right">
+          <a
+            href={`https://www.google.com/maps?q=${encodeURIComponent(firm.mapsQuery)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-steeldeep hover:text-ink"
+          >
+            Open in Google Maps ↗
+          </a>
         </div>
       </section>
     </>
