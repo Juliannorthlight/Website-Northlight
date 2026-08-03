@@ -19,7 +19,8 @@ export default function LocationMap() {
     const map = L.map(containerRef.current, {
       center: [LAT, LON],
       zoom: 16,
-      scrollWheelZoom: false, // don't hijack page scroll
+      scrollWheelZoom: true, // zoom with the wheel while hovering
+      zoomControl: false, // hide the +/- buttons
     });
     mapRef.current = map;
     map.attributionControl.setPrefix(false); // remove the "Leaflet" credit (not required)
@@ -31,13 +32,14 @@ export default function LocationMap() {
       maxZoom: 20,
     }).addTo(map);
 
-    L.circleMarker([LAT, LON], {
-      radius: 9,
-      color: "#0B1B2E",
-      weight: 2,
-      fillColor: "#3F6C94",
-      fillOpacity: 1,
-    })
+    const pin = L.divIcon({
+      className: "nl-pin",
+      html: '<svg width="28" height="40" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12c0 8.4 12 22 12 22s12-13.6 12-22C24 5.4 18.6 0 12 0z" fill="#0B1B2E"/><circle cx="12" cy="12" r="4.2" fill="#ffffff"/></svg>',
+      iconSize: [28, 40],
+      iconAnchor: [14, 40],
+      popupAnchor: [0, -36],
+    });
+    L.marker([LAT, LON], { icon: pin })
       .addTo(map)
       .bindPopup("Northlight Group<br>33 Glasshouse Street, W1B 5DG");
 
@@ -59,6 +61,7 @@ export default function LocationMap() {
         }
         .leaflet-control-attribution a { color: #9aa4ae !important; text-decoration: none !important; }
         .leaflet-tile-pane { filter: grayscale(1); }
+        .nl-pin { background: transparent; border: none; }
       `}</style>
       <div
         ref={containerRef}

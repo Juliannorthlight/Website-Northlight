@@ -103,7 +103,17 @@ export default function ContactPage() {
               </div>
             ) : showForm ? (
               <form onSubmit={handleSubmit}>
-                <h2 className="text-xl text-ink">Make an enquiry</h2>
+                <div className="flex items-center justify-between gap-4">
+                  <h2 className="text-xl text-ink">Make an enquiry</h2>
+                  <button
+                    type="button"
+                    onClick={() => setShowForm(false)}
+                    className="shrink-0 text-sm font-semibold text-steeldeep hover:text-ink"
+                    aria-label="Close the enquiry form"
+                  >
+                    Close ✕
+                  </button>
+                </div>
 
                 {/* Subject line for the delivered email + spam honeypot */}
                 <input type="hidden" name="_subject" value="New enquiry — northlight.co.uk" />
