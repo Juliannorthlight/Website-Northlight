@@ -3,6 +3,7 @@ import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 import { Eyebrow, ButtonLink, ArrowRight } from "@/components/ui";
 import { ContactCTA } from "@/components/ContactCTA";
+import { ScrollProgressLine } from "@/components/ScrollProgressLine";
 import { process, strategies } from "@/lib/content";
 
 // Home statement numbers — the two headline metrics count up on first view.
@@ -87,18 +88,16 @@ export default function HomePage() {
       <div className="relative z-10 bg-white">
       {/* ---------- Who we are (editorial, animated) ---------- */}
       <section className="border-b border-line bg-white">
-        <div className="container-nl py-24 md:py-32">
+        <div className="container-nl relative py-24 md:py-32">
+          <ScrollProgressLine />
           <div className="grid gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
             <div>
-              <Reveal variant="left">
-                <Eyebrow>Who we are</Eyebrow>
-              </Reveal>
-              <Reveal variant="left" delay={90}>
-                <h2 className="mt-6 text-4xl font-medium leading-[1.08] text-ink md:text-[46px]">
+              <Eyebrow>Who we are</Eyebrow>
+              <Reveal variant="left" className="mt-6">
+                <h2 className="text-4xl font-medium leading-[1.08] text-ink md:text-[46px]">
                   A European asset manager with its own ethos
                 </h2>
               </Reveal>
-              <Reveal variant="line" delay={280} className="mt-9 h-0.5 w-28 bg-steel" />
             </div>
             <div className="flex flex-col justify-center">
               <Reveal variant="right">
@@ -219,23 +218,25 @@ export default function HomePage() {
       {/* ---------- Team ---------- */}
       <section className="border-b border-line bg-mist">
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1fr_1fr] md:py-24">
-          <Reveal variant="left">
+          <div>
             <Eyebrow>Our team</Eyebrow>
-            <h2 className="mt-4 text-3xl text-ink md:text-[34px]">
-              Led by its founders, Cyril Armleder and Shahar Zer
-            </h2>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-inksoft">
-              Northlight is led by its two founding portfolio managers, whose careers span senior
-              roles at GLG Partners, Goldman Sachs, JP Morgan and Lehman Brothers — supported by a
-              diverse team with more than ninety years of combined credit experience.
-            </p>
-            <div className="mt-8">
-              <ButtonLink href="/team" variant="ghost">
-                Meet the team <ArrowRight />
-              </ButtonLink>
-            </div>
-          </Reveal>
-          <Reveal variant="right" delay={120}>
+            <Reveal variant="left" className="mt-4">
+              <h2 className="text-3xl text-ink md:text-[34px]">
+                Led by its founders, Cyril Armleder and Shahar Zer
+              </h2>
+              <p className="mt-6 max-w-md text-[17px] leading-relaxed text-inksoft">
+                Northlight is led by its two founding portfolio managers, whose careers span senior
+                roles at GLG Partners, Goldman Sachs, JP Morgan and Lehman Brothers — supported by a
+                diverse team with more than ninety years of combined credit experience.
+              </p>
+              <div className="mt-8">
+                <ButtonLink href="/team" variant="ghost">
+                  Meet the team <ArrowRight />
+                </ButtonLink>
+              </div>
+            </Reveal>
+          </div>
+          <div>
             <ul className="ml-1 space-y-8 border-l-2 border-line pl-9 md:pl-10">
               {homeTeamStats.map((stat) => (
                 <li key={stat.label} className="relative">
@@ -249,47 +250,47 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* ---------- Our home ---------- */}
       <section className="border-b border-line bg-white">
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1.15fr_0.85fr] md:gap-16 md:py-24">
-          <Reveal variant="left">
-            <div className="relative overflow-hidden border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/office.jpg"
-                alt="Regent Street, London — Northlight is based nearby at 33 Glasshouse Street"
-                className="block aspect-[4/3] w-full object-cover"
-                style={{ filter: "grayscale(100%) contrast(1.05) brightness(1.06)" }}
-                loading="lazy"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 mix-blend-multiply"
-                style={{ background: "linear-gradient(155deg,#2a6aa8 0%,#0B1B2E 95%)", opacity: 0.4 }}
-              />
-              <span className="absolute bottom-3 right-3 bg-ink/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/80">
-                Regent Street, London W1
-              </span>
-            </div>
-          </Reveal>
-          <Reveal variant="right" delay={120}>
+          <div className="relative overflow-hidden border border-line">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/office.jpg"
+              alt="Regent Street, London — Northlight is based nearby at 33 Glasshouse Street"
+              className="block aspect-[4/3] w-full object-cover"
+              style={{ filter: "grayscale(100%) contrast(1.05) brightness(1.06)" }}
+              loading="lazy"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 mix-blend-multiply"
+              style={{ background: "linear-gradient(155deg,#2a6aa8 0%,#0B1B2E 95%)", opacity: 0.4 }}
+            />
+            <span className="absolute bottom-3 right-3 bg-ink/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/80">
+              Regent Street, London W1
+            </span>
+          </div>
+          <div>
             <Eyebrow>Our home</Eyebrow>
-            <h2 className="mt-4 text-3xl leading-tight text-ink md:text-[34px]">
-              In the heart of London&apos;s West End
-            </h2>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-inksoft">
-              Northlight is based at 33 Glasshouse Street, just off Piccadilly Circus — at the centre
-              of London&apos;s investment-management community.
-            </p>
-            <div className="mt-8">
-              <ButtonLink href="/contact" variant="ghost">
-                Get in touch <ArrowRight />
-              </ButtonLink>
-            </div>
-          </Reveal>
+            <Reveal variant="right" className="mt-4">
+              <h2 className="text-3xl leading-tight text-ink md:text-[34px]">
+                In the heart of London&apos;s West End
+              </h2>
+              <p className="mt-6 max-w-md text-[17px] leading-relaxed text-inksoft">
+                Northlight is based at 33 Glasshouse Street, just off Piccadilly Circus — at the
+                centre of London&apos;s investment-management community.
+              </p>
+              <div className="mt-8">
+                <ButtonLink href="/contact" variant="ghost">
+                  Get in touch <ArrowRight />
+                </ButtonLink>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 

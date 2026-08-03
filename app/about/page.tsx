@@ -25,23 +25,25 @@ export default function AboutPage() {
       {/* Founding story */}
       <section className="border-b border-line bg-white">
         <div className="container-nl grid gap-12 py-20 md:grid-cols-[1.35fr_1fr]">
-          <Reveal variant="left">
+          <div>
             <Eyebrow>Who we are</Eyebrow>
-            <h2 className="mt-4 text-3xl text-ink">Built by credit specialists, for credit investing</h2>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-inksoft">
-              Northlight was founded in 2009 by portfolio managers Cyril Armleder and Shahar Zer,
-              following their multi-decade sell-side and buy-side careers, with the goal of
-              establishing a European asset manager with its own ethos — one with a focus on
-              liquidity-adjusted risk and return.
-            </p>
-            <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-inksoft">
-              The team invests across the entire credit spectrum, with its primary focus on the
-              European high-yield markets. The firm seeks to generate consistent, positive and
-              uncorrelated returns across all market environments, with an emphasis on liquidity and
-              capital preservation.
-            </p>
-          </Reveal>
-          <Reveal variant="right" delay={120}>
+            <Reveal variant="left" className="mt-4">
+              <h2 className="text-3xl text-ink">Built by credit specialists, for credit investing</h2>
+              <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-inksoft">
+                Northlight was founded in 2009 by portfolio managers Cyril Armleder and Shahar Zer,
+                following their multi-decade sell-side and buy-side careers, with the goal of
+                establishing a European asset manager with its own ethos — one with a focus on
+                liquidity-adjusted risk and return.
+              </p>
+              <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-inksoft">
+                The team invests across the entire credit spectrum, with its primary focus on the
+                European high-yield markets. The firm seeks to generate consistent, positive and
+                uncorrelated returns across all market environments, with an emphasis on liquidity
+                and capital preservation.
+              </p>
+            </Reveal>
+          </div>
+          <div>
             <ul className="ml-1 space-y-8 border-l-2 border-line pl-8">
               {firmFacts.map((fact) => (
                 <li key={fact.label} className="relative">
@@ -55,43 +57,43 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* Office / 33 Glasshouse Street */}
       <section className="border-b border-line bg-mist">
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1.1fr_1fr]">
-          <Reveal>
+          <div className="relative overflow-hidden border border-line">
             {/* Placeholder photo (Regent Street quadrant, licence-free) — swap for
                 a real 33 Glasshouse Street shot when supplied. */}
-            <div className="relative overflow-hidden border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/office.jpg"
-                alt="Regent Street, London — near Northlight's office at 33 Glasshouse Street"
-                className="block aspect-[4/3] w-full object-cover"
-                style={{ filter: "grayscale(100%) contrast(1.05) brightness(1.06)" }}
-                loading="lazy"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 mix-blend-multiply"
-                style={{ background: "linear-gradient(155deg,#2a6aa8 0%,#0B1B2E 95%)", opacity: 0.4 }}
-              />
-              <span className="absolute bottom-3 right-3 bg-ink/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/80">
-                Regent Street, London W1
-              </span>
-            </div>
-          </Reveal>
-          <Reveal delay={120}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/office.jpg"
+              alt="Regent Street, London — near Northlight's office at 33 Glasshouse Street"
+              className="block aspect-[4/3] w-full object-cover"
+              style={{ filter: "grayscale(100%) contrast(1.05) brightness(1.06)" }}
+              loading="lazy"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 mix-blend-multiply"
+              style={{ background: "linear-gradient(155deg,#2a6aa8 0%,#0B1B2E 95%)", opacity: 0.4 }}
+            />
+            <span className="absolute bottom-3 right-3 bg-ink/80 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-white/80">
+              Regent Street, London W1
+            </span>
+          </div>
+          <div>
             <Eyebrow>Our home</Eyebrow>
-            <h2 className="mt-4 text-3xl text-ink">In the heart of London&apos;s West End</h2>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-inksoft">
-              Northlight is based at 33 Glasshouse Street, just off Piccadilly Circus — at the centre
-              of London&apos;s investment-management community and a short walk from the city&apos;s
-              principal counterparties and advisers.
-            </p>
-          </Reveal>
+            <Reveal variant="right" className="mt-4">
+              <h2 className="text-3xl text-ink">In the heart of London&apos;s West End</h2>
+              <p className="mt-6 max-w-md text-[17px] leading-relaxed text-inksoft">
+                Northlight is based at 33 Glasshouse Street, just off Piccadilly Circus — at the
+                centre of London&apos;s investment-management community and a short walk from the
+                city&apos;s principal counterparties and advisers.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 

@@ -91,31 +91,31 @@ export default function TeamPage() {
       {/* Team stats — Sona-style connected rail */}
       <section className="border-b border-line bg-mist">
         <div className="container-nl grid gap-12 py-16 md:grid-cols-[1fr_1fr] md:items-center md:py-20">
-          <Reveal variant="left">
+          <div>
             <Eyebrow>The team in numbers</Eyebrow>
-            <p className="mt-5 max-w-md text-[17px] leading-relaxed text-inksoft">
-              Northlight&apos;s founding portfolio managers are supported by a wider team across
-              research, risk, operations and investor relations.
-            </p>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
-              Full team details are available to prospective investors on request.
-            </p>
-          </Reveal>
-          <Reveal variant="right" delay={120}>
-            <ul className="ml-1 space-y-9 border-l-2 border-line pl-9">
-              {teamStatsAnim.map((stat) => (
-                <li key={stat.label} className="relative">
-                  <span className="absolute -left-[43px] top-1.5 h-3 w-3 rounded-full bg-steel ring-4 ring-mist" />
-                  <div className="font-serif text-4xl font-semibold leading-none text-ink md:text-5xl">
-                    {stat.value}
-                  </div>
-                  <div className="mt-2.5 text-[13px] uppercase tracking-[0.12em] text-muted">
-                    {stat.label}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+            <Reveal variant="left" className="mt-5">
+              <p className="max-w-md text-[17px] leading-relaxed text-inksoft">
+                Northlight&apos;s founding portfolio managers are supported by a wider team across
+                research, risk, operations and investor relations.
+              </p>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
+                Full team details are available to prospective investors on request.
+              </p>
+            </Reveal>
+          </div>
+          <ul className="ml-1 space-y-9 border-l-2 border-line pl-9">
+            {teamStatsAnim.map((stat) => (
+              <li key={stat.label} className="relative">
+                <span className="absolute -left-[43px] top-1.5 h-3 w-3 rounded-full bg-steel ring-4 ring-mist" />
+                <div className="font-serif text-4xl font-semibold leading-none text-ink md:text-5xl">
+                  {stat.value}
+                </div>
+                <div className="mt-2.5 text-[13px] uppercase tracking-[0.12em] text-muted">
+                  {stat.label}
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
