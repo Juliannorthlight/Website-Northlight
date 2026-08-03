@@ -58,6 +58,7 @@ export default function LocationMap() {
           color: #9aa4ae !important;
         }
         .leaflet-control-attribution a { color: #9aa4ae !important; text-decoration: none !important; }
+        .leaflet-tile-pane { filter: grayscale(1); }
       `}</style>
       <div
         ref={containerRef}

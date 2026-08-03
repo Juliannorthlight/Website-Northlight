@@ -3,7 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { PageHero } from "@/components/PageHero";
-import { Eyebrow } from "@/components/ui";
+import { Eyebrow, ArrowRight } from "@/components/ui";
 import { firm } from "@/lib/content";
 
 // Leaflet needs the browser — load the map client-side only.
@@ -16,6 +16,7 @@ type Status = "idle" | "submitting" | "sent" | "error";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
+  const [showForm, setShowForm] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -79,8 +80,8 @@ export default function ContactPage() {
             </dl>
           </div>
 
-          {/* Enquiry form */}
-          <div className="border border-line bg-mist p-8 md:p-10">
+          {/* Enquiry — a clean CTA by default; the form opens on click */}
+          <div className="flex flex-col justify-center border border-line bg-mist p-8 md:p-10">
             {status === "sent" ? (
               <div>
                 <h2 className="text-2xl text-ink">Thank you for your enquiry</h2>
@@ -100,7 +101,7 @@ export default function ContactPage() {
                   &larr; Send another enquiry
                 </button>
               </div>
-            ) : (
+            ) : showForm ? (
               <form onSubmit={handleSubmit}>
                 <h2 className="text-xl text-ink">Make an enquiry</h2>
 
@@ -186,6 +187,33 @@ export default function ContactPage() {
                   .
                 </p>
               </form>
+            ) : (
+              <div>
+                <Eyebrow>Make an enquiry</Eyebrow>
+                <h2 className="mt-4 text-2xl text-ink md:text-[28px]">
+                  Speak with our Investor Relations team
+                </h2>
+                <p className="mt-4 max-w-md text-[16px] leading-relaxed text-inksoft">
+                  Share a few details about your enquiry and a member of our team will be in touch.
+                  For anything urgent, you can email us directly.
+                </p>
+                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowForm(true)}
+                    className="group inline-flex items-center gap-2.5 bg-ink px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-navy"
+                  >
+                    Start an enquiry
+                    <ArrowRight />
+                  </button>
+                  <a
+                    href={`mailto:${firm.email}`}
+                    className="text-sm font-semibold text-steeldeep hover:text-ink"
+                  >
+                    Or email us directly
+                  </a>
+                </div>
+              </div>
             )}
           </div>
         </div>
