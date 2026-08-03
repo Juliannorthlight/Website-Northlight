@@ -11,8 +11,12 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Close the mobile menu on route change.
+  // On every route change (and first load): jump to the top, close the menu, and
+  // reset the bar to transparent so each tab opens over its hero image.
   useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+    setScrolled(false);
     setOpen(false);
   }, [pathname]);
 
