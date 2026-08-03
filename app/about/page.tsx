@@ -25,7 +25,7 @@ export default function AboutPage() {
       {/* Founding story */}
       <section className="border-b border-line bg-white">
         <div className="container-nl grid gap-12 py-20 md:grid-cols-[1.35fr_1fr]">
-          <Reveal>
+          <Reveal variant="left">
             <Eyebrow>Who we are</Eyebrow>
             <h2 className="mt-4 text-3xl text-ink">Built by credit specialists, for credit investing</h2>
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-inksoft">
@@ -41,7 +41,7 @@ export default function AboutPage() {
               capital preservation.
             </p>
           </Reveal>
-          <Reveal delay={120}>
+          <Reveal variant="right" delay={120}>
             <ul className="ml-1 space-y-8 border-l-2 border-line pl-8">
               {firmFacts.map((fact) => (
                 <li key={fact.label} className="relative">

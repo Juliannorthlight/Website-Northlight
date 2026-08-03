@@ -91,7 +91,7 @@ export default function TeamPage() {
       {/* Team stats — Sona-style connected rail */}
       <section className="border-b border-line bg-mist">
         <div className="container-nl grid gap-12 py-16 md:grid-cols-[1fr_1fr] md:items-center md:py-20">
-          <Reveal>
+          <Reveal variant="left">
             <Eyebrow>The team in numbers</Eyebrow>
             <p className="mt-5 max-w-md text-[17px] leading-relaxed text-inksoft">
               Northlight&apos;s founding portfolio managers are supported by a wider team across
@@ -101,7 +101,7 @@ export default function TeamPage() {
               Full team details are available to prospective investors on request.
             </p>
           </Reveal>
-          <Reveal delay={120}>
+          <Reveal variant="right" delay={120}>
             <ul className="ml-1 space-y-9 border-l-2 border-line pl-9">
               {teamStatsAnim.map((stat) => (
                 <li key={stat.label} className="relative">

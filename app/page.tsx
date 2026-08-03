@@ -85,36 +85,48 @@ export default function HomePage() {
 
       {/* Content block — scrolls up over the pinned hero above */}
       <div className="relative z-10 bg-white">
-      {/* ---------- Who we are (navy accent block) ---------- */}
+      {/* ---------- Who we are (editorial, animated) ---------- */}
       <section className="border-b border-line bg-white">
-        <div className="container-nl py-20 md:py-24">
-          <div className="grid overflow-hidden border border-line md:grid-cols-[0.9fr_1.1fr]">
-          <Reveal className="flex flex-col justify-center bg-ink p-8 text-white md:p-12">
-            <Eyebrow light>Who we are</Eyebrow>
-            <h2 className="mt-4 text-3xl leading-tight md:text-[36px]">
-              A European asset manager with its own ethos
-            </h2>
-          </Reveal>
-          <Reveal delay={120} className="bg-white p-8 md:p-12">
-            <p className="text-[18px] leading-relaxed text-inksoft">
-              Northlight was founded in 2009 by portfolio managers Cyril Armleder and Shahar Zer,
-              after multi-decade sell-side and buy-side careers, with the goal of building a European
-              asset manager with a distinct ethos — one focused on liquidity-adjusted risk and return.
-            </p>
-            <p className="mt-5 text-[18px] leading-relaxed text-inksoft">
-              The team invests across the entire credit spectrum, with its primary focus on the
-              European high-yield markets, seeking consistent, positive and uncorrelated returns in
-              all market environments.
-            </p>
-            <div className="mt-8">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-steeldeep hover:text-ink"
-              >
-                About Northlight <ArrowRight />
-              </Link>
+        <div className="container-nl py-24 md:py-32">
+          <div className="grid gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
+            <div>
+              <Reveal variant="left">
+                <Eyebrow>Who we are</Eyebrow>
+              </Reveal>
+              <Reveal variant="left" delay={90}>
+                <h2 className="mt-6 text-4xl font-medium leading-[1.08] text-ink md:text-[46px]">
+                  A European asset manager with its own ethos
+                </h2>
+              </Reveal>
+              <Reveal variant="line" delay={280} className="mt-9 h-0.5 w-28 bg-steel" />
             </div>
-          </Reveal>
+            <div className="flex flex-col justify-center">
+              <Reveal variant="right">
+                <p className="text-[18px] leading-relaxed text-inksoft">
+                  Northlight was founded in 2009 by portfolio managers Cyril Armleder and Shahar Zer,
+                  after multi-decade sell-side and buy-side careers, with the goal of building a
+                  European asset manager with a distinct ethos — one focused on liquidity-adjusted
+                  risk and return.
+                </p>
+              </Reveal>
+              <Reveal variant="right" delay={120}>
+                <p className="mt-5 text-[18px] leading-relaxed text-inksoft">
+                  The team invests across the entire credit spectrum, with its primary focus on the
+                  European high-yield markets, seeking consistent, positive and uncorrelated returns
+                  in all market environments.
+                </p>
+              </Reveal>
+              <Reveal variant="right" delay={220}>
+                <div className="mt-8">
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-steeldeep hover:text-ink"
+                  >
+                    About Northlight <ArrowRight />
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
@@ -207,7 +219,7 @@ export default function HomePage() {
       {/* ---------- Team ---------- */}
       <section className="border-b border-line bg-mist">
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1fr_1fr] md:py-24">
-          <Reveal>
+          <Reveal variant="left">
             <Eyebrow>Our team</Eyebrow>
             <h2 className="mt-4 text-3xl text-ink md:text-[34px]">
               Led by its founders, Cyril Armleder and Shahar Zer
@@ -223,7 +235,7 @@ export default function HomePage() {
               </ButtonLink>
             </div>
           </Reveal>
-          <Reveal delay={120}>
+          <Reveal variant="right" delay={120}>
             <ul className="ml-1 space-y-8 border-l-2 border-line pl-9 md:pl-10">
               {homeTeamStats.map((stat) => (
                 <li key={stat.label} className="relative">
@@ -244,7 +256,7 @@ export default function HomePage() {
       {/* ---------- Our home ---------- */}
       <section className="border-b border-line bg-white">
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1.15fr_0.85fr] md:gap-16 md:py-24">
-          <Reveal>
+          <Reveal variant="left">
             <div className="relative overflow-hidden border border-line">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -263,7 +275,7 @@ export default function HomePage() {
               </span>
             </div>
           </Reveal>
-          <Reveal delay={120}>
+          <Reveal variant="right" delay={120}>
             <Eyebrow>Our home</Eyebrow>
             <h2 className="mt-4 text-3xl leading-tight text-ink md:text-[34px]">
               In the heart of London&apos;s West End
