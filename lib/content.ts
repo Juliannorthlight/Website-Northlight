@@ -297,12 +297,6 @@ export type TeamMember = {
 
 export const team: TeamMember[] = [
   {
-    name: "Cyril Armleder",
-    role: "Partner & Portfolio Manager",
-    photo: "/team/cyril-armleder.jpg",
-    bio: "Cyril is a Partner of Northlight Group and a member of the Investment and Management Committees for the Northlight funds. He was previously a Partner at GLG Partners (2005–2009), where he co-managed the GLG Credit Fund and advised on credit strategies across other GLG funds. At Goldman Sachs (2001–2005) he established and headed the iTraxx credit index and derivatives trading desk, having co-run the European TMT credit sectors and helped set up the European Credit Trading Desk. He began his career at Commerzbank (1993–2001) as a credit derivatives trader during the emergence of the CDS market. Cyril holds an MSc in Mathematical Finance from Birkbeck College, University of London, and a degree in Macroeconomics from HEC Lausanne.",
-  },
-  {
     name: "Shahar Zer",
     role: "Partner & Portfolio Manager",
     photo: "/team/shahar-zer.jpg",

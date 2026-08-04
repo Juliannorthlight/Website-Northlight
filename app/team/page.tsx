@@ -16,7 +16,7 @@ const teamStatsAnim: { value: React.ReactNode; label: string }[] = [
 export const metadata: Metadata = {
   title: "Team",
   description:
-    "Northlight is led by founding portfolio managers Cyril Armleder and Shahar Zer, with a team carrying 90+ years of combined credit experience.",
+    "Northlight is led by an experienced investment team carrying 90+ years of combined credit experience.",
 };
 
 function Portrait({ initials, photo, name }: { initials: string; photo?: string; name: string }) {
@@ -55,13 +55,13 @@ export default function TeamPage() {
     <>
       <PageHero
         eyebrow="Our team"
-        title="Led by its founders"
-        intro="Northlight is led by founding portfolio managers Cyril Armleder and Shahar Zer, supported by a diverse, experienced investment team."
+        title="An experienced investment team"
+        intro="Northlight's investment team brings deep, cross-cycle experience across the European credit markets."
         image="/heroes/viaduct.jpg"
         imagePosition="center 42%"
       />
 
-      {/* Founders */}
+      {/* Team */}
       <section className="border-b border-line bg-white">
         <div className="container-nl space-y-14 py-20">
           {team.map((m, i) => {
@@ -95,8 +95,8 @@ export default function TeamPage() {
             <Eyebrow>The team in numbers</Eyebrow>
             <Reveal variant="left" className="mt-5">
               <p className="max-w-md text-[17px] leading-relaxed text-inksoft">
-                Northlight&apos;s founding portfolio managers are supported by a wider team across
-                research, risk, operations and investor relations.
+                Northlight&apos;s portfolio management is supported by a wider team across research,
+                risk, operations and investor relations.
               </p>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
                 Full team details are available to prospective investors on request.

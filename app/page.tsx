@@ -103,10 +103,9 @@ export default function HomePage() {
             <div className="flex flex-col justify-center">
               <Reveal variant="right">
                 <p className="text-[18px] leading-relaxed text-inksoft">
-                  Northlight was founded in 2009 by portfolio managers Cyril Armleder and Shahar Zer,
-                  after multi-decade sell-side and buy-side careers, with the goal of building a
-                  European asset manager with a distinct ethos — one focused on liquidity-adjusted
-                  risk and return.
+                  Northlight was founded in 2009 by its portfolio managers, after multi-decade
+                  sell-side and buy-side careers, with the goal of building a European asset manager
+                  with a distinct ethos — one focused on liquidity-adjusted risk and return.
                 </p>
               </Reveal>
               <Reveal variant="right" delay={120}>
@@ -225,9 +224,9 @@ export default function HomePage() {
             <Eyebrow>Our team</Eyebrow>
             <Reveal variant="left" className="mt-5">
               <p className="max-w-lg font-serif text-[22px] leading-[1.5] text-ink md:text-[26px] md:leading-[1.45]">
-                Northlight is led by its two founding portfolio managers, whose careers span senior
-                roles at GLG Partners, Goldman Sachs, JP Morgan and Lehman Brothers — supported by a
-                diverse team with more than ninety years of combined credit experience.
+                Northlight is led by an experienced investment team whose careers span senior roles
+                across leading global banks and credit funds — supported by more than ninety years
+                of combined credit experience.
               </p>
               <div className="mt-8">
                 <ButtonLink href="/team" variant="ghost">

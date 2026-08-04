@@ -8,7 +8,7 @@ import { firmFacts } from "@/lib/content";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Founded in 2009 by Cyril Armleder and Shahar Zer, Northlight Group is a London-based investment manager specialising in European corporate credit.",
+    "Founded in 2009, Northlight Group is a London-based investment manager specialising in European corporate credit.",
 };
 
 export default function AboutPage() {
@@ -30,10 +30,9 @@ export default function AboutPage() {
             <Reveal variant="left" className="mt-4">
               <h2 className="text-3xl text-ink">Built by credit specialists, for credit investing</h2>
               <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-inksoft">
-                Northlight was founded in 2009 by portfolio managers Cyril Armleder and Shahar Zer,
-                following their multi-decade sell-side and buy-side careers, with the goal of
-                establishing a European asset manager with its own ethos — one with a focus on
-                liquidity-adjusted risk and return.
+                Northlight was founded in 2009 by its portfolio managers, following multi-decade
+                sell-side and buy-side careers, with the goal of establishing a European asset
+                manager with its own ethos — one with a focus on liquidity-adjusted risk and return.
               </p>
               <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-inksoft">
                 The team invests across the entire credit spectrum, with its primary focus on the
