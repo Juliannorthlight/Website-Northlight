@@ -33,8 +33,6 @@ export const metadata: Metadata = {
     "Northlight Group is a London-based investment manager specialising in European credit. Fundamental research, risk discipline and consistent returns since 2009.",
   // Draft: keep it out of search engines until ready to go public.
   robots: { index: false, follow: false },
-  // TEMP deploy-pipeline check — removed right after verifying.
-  other: { "deploy-check": "nl-deploycheck-8f3a2c" },
 };
 
 export default function RootLayout({
