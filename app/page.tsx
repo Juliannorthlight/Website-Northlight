@@ -223,11 +223,8 @@ export default function HomePage() {
         <div className="container-nl grid items-center gap-10 py-20 md:grid-cols-[1fr_1fr] md:py-24">
           <div>
             <Eyebrow>Our team</Eyebrow>
-            <Reveal variant="left" className="mt-4">
-              <h2 className="text-3xl text-ink md:text-[34px]">
-                Led by its founders, Cyril Armleder and Shahar Zer
-              </h2>
-              <p className="mt-6 max-w-md text-[17px] leading-relaxed text-inksoft">
+            <Reveal variant="left" className="mt-5">
+              <p className="max-w-lg font-serif text-[22px] leading-[1.5] text-ink md:text-[26px] md:leading-[1.45]">
                 Northlight is led by its two founding portfolio managers, whose careers span senior
                 roles at GLG Partners, Goldman Sachs, JP Morgan and Lehman Brothers — supported by a
                 diverse team with more than ninety years of combined credit experience.
